@@ -6,6 +6,7 @@ import { GeolocationGreeting } from '../components/GeolocationGreeting';
 import { LiveAnalytics } from '../components/LiveAnalytics';
 import { About } from '../components/About';
 import { Skills } from '../components/Skills';
+import { Projects } from '../components/Projects';
 import { Timeline } from '../components/Timeline';
 import { Games } from '../components/Games';
 import { Contact } from '../components/Contact';
@@ -44,6 +45,7 @@ export const Index = () => {
 
         <About />
         <Skills />
+        <Projects />
         <Timeline />
         <Games />
         <Contact />

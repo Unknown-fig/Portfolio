@@ -29,6 +29,7 @@ export const Footer = () => {
             <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
             <a href="/#about" className="hover:text-foreground transition-colors">About</a>
             <a href="/#skills" className="hover:text-foreground transition-colors">Skills</a>
+            <a href="/#projects" className="hover:text-foreground transition-colors">Projects</a>
             <a href="/#timeline" className="hover:text-foreground transition-colors">Timeline</a>
             <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
             <Link to="/certificates" className="hover:text-foreground transition-colors">Certificates</Link>

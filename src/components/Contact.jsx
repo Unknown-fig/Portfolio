@@ -33,7 +33,7 @@ export const Contact = () => {
         <div className="flex flex-col items-start mb-12 sm:mb-16">
           <div className="pulse-chip mb-4">
             <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white text-xs font-bold mr-2">
-              05
+              06
             </span>
             <span>Contact</span>
           </div>
