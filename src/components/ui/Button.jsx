@@ -11,7 +11,7 @@ export const Button = React.forwardRef(({
   children,
   ...props
 }, ref) => {
-  const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none rounded-md";
+  const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-150 ease-out active:scale-[0.97] select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50 disabled:pointer-events-none rounded-xl";
   
   const variants = {
     default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow",

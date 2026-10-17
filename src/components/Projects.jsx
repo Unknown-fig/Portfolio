@@ -109,7 +109,7 @@ export const Projects = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 flex items-center gap-2 border ${
+                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-150 spring-press select-none flex items-center gap-2 border ${
                     isSelected
                       ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20 scale-[1.02]"
                       : "bg-card/70 text-muted-foreground border-border/80 hover:text-foreground hover:bg-card hover:border-primary/40"
@@ -179,7 +179,7 @@ export const Projects = () => {
           {filteredProjects.map((project) => (
             <Card
               key={project.id}
-              className="group flex flex-col overflow-hidden bg-card/85 backdrop-blur-md border-border/80 hover:border-primary/50 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300"
+              className="group flex flex-col overflow-hidden glass-specular border-border/60 hover:border-primary/50 hover:shadow-2xl hover:-translate-y-1.5 rounded-2xl transition-all duration-300"
             >
               {/* Card Image Banner */}
               <div 
@@ -322,16 +322,18 @@ export const Projects = () => {
 
       </div>
 
-      {/* Project Detail & Quick Inspect Modal */}
+      {/* Project Detail & Quick Inspect Modal / Apple Sheet */}
       {activeModalProject && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in"
           onClick={() => setActiveModalProject(null)}
         >
           <div 
-            className="relative w-full max-w-3xl max-h-[90vh] bg-background border border-border rounded-3xl shadow-2xl overflow-y-auto flex flex-col"
+            className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] bg-background border border-border/80 rounded-t-[32px] sm:rounded-3xl shadow-2xl overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Apple HIG Sheet Grabber Indicator */}
+            <div className="w-12 h-1.5 bg-muted-foreground/35 hover:bg-muted-foreground/60 rounded-full mx-auto my-2.5 transition-colors cursor-grab sm:hidden flex-shrink-0" />
             {/* Modal Image Header */}
             <div className="relative h-60 sm:h-72 w-full bg-muted flex-shrink-0 overflow-hidden">
               <img
@@ -369,7 +371,7 @@ export const Projects = () => {
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 sm:p-8 space-y-6 flex-1">
+            <div className="p-6 sm:p-8 space-y-6 flex-1 pb-[max(1.75rem,env(safe-area-inset-bottom))]">
               {/* Description */}
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">

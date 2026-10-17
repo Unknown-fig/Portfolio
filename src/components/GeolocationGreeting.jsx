@@ -32,7 +32,7 @@ export const GeolocationGreeting = () => {
   }
 
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/70 border border-border/80 backdrop-blur-sm text-foreground text-sm shadow-sm animate-fade-in">
+    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-specular border border-border/60 text-foreground text-sm shadow-sm animate-fade-in">
       <MapPin className="w-4 h-4 text-primary animate-bounce" />
       <span>
         Hello from <strong className="text-primary font-semibold">{city}</strong>—thanks for visiting!

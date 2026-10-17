@@ -34,7 +34,7 @@ export const LiveAnalytics = () => {
   return (
     <div
       onClick={handleClick}
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-card/70 border border-border/80 backdrop-blur-sm shadow-sm cursor-pointer transition-all duration-200 hover:border-primary/50 hover:bg-card/90 select-none"
+      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-specular border border-border/60 shadow-sm cursor-pointer transition-all duration-150 active:scale-95 select-none hover:border-primary/50"
       title="Click to bump visitor counter"
     >
       <span className="relative flex h-2.5 w-2.5">
@@ -45,7 +45,7 @@ export const LiveAnalytics = () => {
       <span className="text-xs uppercase font-bold tracking-wider text-muted-foreground">
         Live Stats:
       </span>
-      <span className={`text-sm font-bold font-mono transition-transform duration-200 ${clicked ? 'scale-125 text-primary' : 'text-foreground'}`}>
+      <span className={`text-sm font-bold font-mono tnum transition-transform duration-200 ${clicked ? 'scale-125 text-primary' : 'text-foreground'}`}>
         {visitorCount.toLocaleString()} visitors
       </span>
     </div>
