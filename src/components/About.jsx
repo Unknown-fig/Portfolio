@@ -12,6 +12,8 @@ import {
   Lightbulb,
   ShieldCheck
 } from 'lucide-react';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 export const About = () => {
   const [activeStoryIndex, setActiveStoryIndex] = useState(0);
@@ -51,8 +53,12 @@ export const About = () => {
   ];
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-[#180230]/70 border-y border-[#26024a] relative">
-      <div className="section-container">
+    <section id="about" className="py-20 sm:py-28 bg-[#180230]/70 border-y border-[#26024a] relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:01 // ORIGINS]</div>
+      <div className="tech-crosshair top-6 right-6">+ [SEC // ARCHIVES]</div>
+      
+      <div className="section-container relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -78,7 +84,11 @@ export const About = () => {
               return (
                 <button
                   key={idx}
-                  onClick={() => setActiveStoryIndex(idx)}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  onClick={() => {
+                    soundEngine.playSwitch();
+                    setActiveStoryIndex(idx);
+                  }}
                   className={`p-5 rounded-2xl text-left transition-all duration-300 border flex flex-col gap-1.5 ${
                     isSelected
                       ? "bg-[#c8ff00] text-[#140128] border-[#c8ff00] shadow-[0_0_25px_rgba(200,255,0,0.3)] scale-[1.02]"
@@ -101,9 +111,9 @@ export const About = () => {
             })}
           </div>
 
-          {/* Right: Active Story Card Display */}
+          {/* Right: Active Story Card Display with SpotlightCard */}
           <div className="lg:col-span-7">
-            <div className="bg-[#190230]/90 p-8 sm:p-10 rounded-3xl border border-[#360866] h-full flex flex-col justify-between shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+            <SpotlightCard className="p-8 sm:p-10 h-full shadow-[0_0_40px_rgba(0,0,0,0.5)]">
               <div className="space-y-5">
                 <div className="inline-flex items-center gap-2 text-xs font-pixel font-bold text-[#c8ff00] uppercase tracking-wider">
                   <Lightbulb className="w-4 h-4" />
@@ -124,32 +134,35 @@ export const About = () => {
                 <span className="text-3xl text-[#c8ff00] font-serif leading-none">“</span>
                 <span>{stories[activeStoryIndex].quote}</span>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>
 
-        {/* Quick Personal Facts Grid */}
+        {/* Quick Personal Facts Grid with SpotlightCard */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
           {quickFacts.map((fact, idx) => {
             const Icon = fact.icon;
             return (
-              <div 
+              <SpotlightCard 
                 key={idx} 
-                className="p-5 rounded-2xl bg-[#1c0336]/80 border border-[#360866] flex items-center gap-4 hover:border-[#c8ff00]/40 transition-colors shadow-sm"
+                onMouseEnter={() => soundEngine.playHover()}
+                className="p-5 flex items-center gap-4 shadow-sm"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#c8ff00]/10 text-[#c8ff00] flex items-center justify-center shrink-0 border border-[#c8ff00]/20">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-pixel text-[#9860ff] uppercase tracking-wider">
-                    {fact.label}
+                <div className="flex items-center gap-4 w-full">
+                  <div className="w-12 h-12 rounded-xl bg-[#c8ff00]/10 text-[#c8ff00] flex items-center justify-center shrink-0 border border-[#c8ff00]/20">
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <div className="text-xs sm:text-sm font-bold text-white mt-1 line-clamp-1">
-                    {fact.value}
+                  <div>
+                    <div className="text-[10px] font-pixel text-[#9860ff] uppercase tracking-wider">
+                      {fact.label}
+                    </div>
+                    <div className="text-xs sm:text-sm font-bold text-white mt-1 line-clamp-1">
+                      {fact.value}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </SpotlightCard>
             );
           })}
         </div>

@@ -13,18 +13,23 @@ import {
   Zap
 } from 'lucide-react';
 import { MagneticButton } from './ui/MagneticButton';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Hero = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [chaiCount, setChaiCount] = useState(42);
+  const [terminalTab, setTerminalTab] = useState('focus'); // 'focus' | 'specs' | 'manifesto'
 
   const handleCopyEmail = () => {
+    soundEngine.playSuccess();
     navigator.clipboard.writeText('speedrunner0007@gmail.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
   const handleChaiClick = () => {
+    soundEngine.playClick();
     setChaiCount((prev) => prev + 1);
   };
 
@@ -86,7 +91,9 @@ export const Hero = () => {
             <div className="flex flex-wrap items-center gap-4 pt-3 w-full sm:w-auto">
               <MagneticButton
                 href="#projects"
+                onMouseEnter={() => soundEngine.playHover()}
                 onClick={() => {
+                  soundEngine.playClick();
                   const el = document.getElementById('projects');
                   if (el && window.$lenis) window.$lenis.scrollTo(el, { offset: -80 });
                 }}
@@ -97,6 +104,7 @@ export const Hero = () => {
               </MagneticButton>
 
               <MagneticButton
+                onMouseEnter={() => soundEngine.playHover()}
                 onClick={handleCopyEmail}
                 className="btn-1minus1-outline text-sm py-4 px-6"
               >
@@ -116,41 +124,90 @@ export const Hero = () => {
 
           </div>
 
-          {/* Right Column: 1minus1 Workbench Terminal Card */}
+          {/* Right Column: 1minus1 Interactive Workbench Terminal with SpotlightCard */}
           <div className="lg:col-span-5 flex justify-center w-full">
-            <div className="w-full max-w-md rounded-3xl bg-[#190230]/90 border border-[#360866] p-7 shadow-[0_0_50px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between space-y-6">
+            <SpotlightCard className="w-full max-w-md p-6 sm:p-7 shadow-[0_0_50px_rgba(0,0,0,0.6)] space-y-6">
               
-              {/* Terminal Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-[#2a0453]">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#ff3366]" />
-                  <div className="w-3 h-3 rounded-full bg-[#ffb800]" />
-                  <div className="w-3 h-3 rounded-full bg-[#c8ff00]" />
-                  <span className="text-xs font-mono text-[#b8a9cf] ml-2">
-                    utsab@1minus1-node: ~
+              {/* Terminal Header & Mode Switcher */}
+              <div className="flex flex-col gap-3 pb-4 border-b border-[#2a0453]">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#ff3366]" />
+                    <div className="w-3 h-3 rounded-full bg-[#ffb800]" />
+                    <div className="w-3 h-3 rounded-full bg-[#c8ff00]" />
+                    <span className="text-xs font-mono text-[#b8a9cf] ml-2">
+                      utsab@1minus1-node: ~
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-pixel px-2 py-0.5 rounded bg-[#c8ff00]/10 text-[#c8ff00] border border-[#c8ff00]/30 font-bold uppercase">
+                    SYS_ACTIVE
                   </span>
                 </div>
-                <span className="text-[10px] font-pixel px-2.5 py-1 rounded bg-[#c8ff00]/10 text-[#c8ff00] border border-[#c8ff00]/30 font-bold uppercase">
-                  ACTIVE
-                </span>
+
+                {/* Terminal Mode Tabs */}
+                <div className="flex items-center gap-1.5 bg-[#140128] p-1 rounded-xl border border-[#2a0453]">
+                  {[
+                    { id: 'focus', label: 'CURRENT_FOCUS' },
+                    { id: 'specs', label: 'HARDWARE_STACK' },
+                    { id: 'manifesto', label: 'MANIFESTO' }
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => {
+                        soundEngine.playSwitch();
+                        setTerminalTab(tab.id);
+                      }}
+                      onMouseEnter={() => soundEngine.playHover()}
+                      className={`flex-1 py-1 text-[10px] font-pixel rounded-lg uppercase tracking-wider transition-all duration-200 ${
+                        terminalTab === tab.id
+                          ? "bg-[#c8ff00] text-[#140128] font-bold shadow-sm"
+                          : "text-[#b8a9cf] hover:text-white"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              {/* Terminal Snippet in 1minus1 Cyberpunk styling */}
-              <div className="font-mono text-xs space-y-3 bg-[#140128]/90 p-5 rounded-2xl border border-[#26024a] text-left">
-                <div className="text-[#9860ff]">
-                  <span className="text-[#c8ff00] font-bold">❯</span> cat ~/.currently_building
-                </div>
-                <div className="text-white pl-3 border-l-2 border-[#c8ff00] space-y-1.5 text-[12px]">
-                  <div>• <span className="font-bold text-[#c8ff00]">AirCanvas:</span> 3D gesture drawing in browser</div>
-                  <div>• <span className="font-bold text-[#c8ff00]">C Systems:</span> Memory allocators & pointers</div>
-                  <div>• <span className="font-bold text-[#c8ff00]">IoT Sentinel:</span> Arduino MQ-4 gas telemetry</div>
-                </div>
-                <div className="text-[#9860ff] pt-2">
-                  <span className="text-[#c8ff00] font-bold">❯</span> echo $ENGINEERING_RULE
-                </div>
-                <div className="text-[#c8ff00] font-bold pl-3 border-l-2 border-[#9860ff] text-[12px]">
-                  "Zero speculative bloat. Build to understand."
-                </div>
+              {/* Terminal Snippet Body */}
+              <div className="font-mono text-xs bg-[#140128]/95 p-5 rounded-2xl border border-[#26024a] text-left min-h-[140px] flex flex-col justify-between">
+                {terminalTab === 'focus' && (
+                  <div className="space-y-2.5 animate-fade-in">
+                    <div className="text-[#9860ff]">
+                      <span className="text-[#c8ff00] font-bold">❯</span> cat ~/.currently_building
+                    </div>
+                    <div className="text-white pl-3 border-l-2 border-[#c8ff00] space-y-1.5 text-[12px]">
+                      <div>• <span className="font-bold text-[#c8ff00]">AirCanvas:</span> 3D gesture drawing in browser</div>
+                      <div>• <span className="font-bold text-[#c8ff00]">C Systems:</span> Memory allocators & pointers</div>
+                      <div>• <span className="font-bold text-[#c8ff00]">IoT Sentinel:</span> Arduino MQ-4 gas telemetry</div>
+                    </div>
+                  </div>
+                )}
+
+                {terminalTab === 'specs' && (
+                  <div className="space-y-2.5 animate-fade-in">
+                    <div className="text-[#9860ff]">
+                      <span className="text-[#c8ff00] font-bold">❯</span> neofetch --specs
+                    </div>
+                    <div className="text-white pl-3 border-l-2 border-[#9860ff] space-y-1.5 text-[12px]">
+                      <div>• <span className="text-[#9860ff] font-bold">KERNEL:</span> Linux 6.x / POSIX x86_64</div>
+                      <div>• <span className="text-[#9860ff] font-bold">COMPILER:</span> GCC / Clang (C17, C++20)</div>
+                      <div>• <span className="text-[#9860ff] font-bold">GRAPHICS:</span> WebGL 2.0 / Three.js Shaders</div>
+                    </div>
+                  </div>
+                )}
+
+                {terminalTab === 'manifesto' && (
+                  <div className="space-y-2.5 animate-fade-in">
+                    <div className="text-[#9860ff]">
+                      <span className="text-[#c8ff00] font-bold">❯</span> echo $ENGINEERING_RULE
+                    </div>
+                    <div className="text-[#c8ff00] font-bold pl-3 border-l-2 border-[#c8ff00] text-[12px] leading-relaxed">
+                      "Zero speculative bloat. Deconstruct first, master the metal, then build real-world software."
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Personal System Badges */}
@@ -165,6 +222,8 @@ export const Hero = () => {
                     href="https://github.com/Unknown-fig" 
                     target="_blank" 
                     rel="noreferrer" 
+                    onMouseEnter={() => soundEngine.playHover()}
+                    onClick={() => soundEngine.playClick()}
                     className="text-xs font-bold text-[#c8ff00] hover:underline mt-1 block truncate"
                   >
                     @Unknown-fig ↗
@@ -175,6 +234,7 @@ export const Hero = () => {
               {/* Interactive Chai Easter Egg */}
               <div 
                 onClick={handleChaiClick}
+                onMouseEnter={() => soundEngine.playHover()}
                 className="flex items-center justify-between p-3.5 rounded-2xl bg-[#26024a]/60 border border-[#9860ff]/30 cursor-pointer hover:border-[#c8ff00]/60 hover:bg-[#26024a] transition-all select-none group"
                 title="Click to add another cup of chai to the counter!"
               >
@@ -187,7 +247,7 @@ export const Hero = () => {
                 </span>
               </div>
 
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>

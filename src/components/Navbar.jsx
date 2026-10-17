@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Volume2, VolumeX } from 'lucide-react';
 import { MagneticButton } from './ui/MagneticButton';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [sfxEnabled, setSfxEnabled] = useState(soundEngine.enabled);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        const currentProgress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(Math.min(100, Math.max(0, currentProgress)));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleSfx = () => {
+    const newState = soundEngine.toggle();
+    setSfxEnabled(newState);
+  };
 
   const navLinks = [
     { name: "About", href: "/#about" },
@@ -67,6 +88,8 @@ export const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  onClick={() => soundEngine.playClick()}
                   className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 ${
                     location.pathname === item.href
                       ? "text-[#140128] bg-[#c8ff00] font-black shadow-[0_0_15px_rgba(200,255,0,0.3)]"
@@ -79,7 +102,11 @@ export const Navbar = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={() => handleScrollClick(item.href)}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  onClick={() => {
+                    soundEngine.playClick();
+                    handleScrollClick(item.href);
+                  }}
                   className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white/70 hover:text-[#c8ff00] hover:bg-[#26024a]/80 transition-all duration-200"
                 >
                   {item.name}
@@ -88,11 +115,43 @@ export const Navbar = () => {
             })}
           </div>
 
-          {/* Right Magnetic CTA */}
+          {/* Right Action Cluster: SFX Toggle + Magnetic CTA */}
           <div className="hidden sm:flex items-center space-x-3">
+            {/* Audio Feedback Synthesizer Toggle */}
+            <button
+              onClick={toggleSfx}
+              onMouseEnter={() => soundEngine.playHover()}
+              className={`flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-pixel transition-all duration-200 ${
+                sfxEnabled
+                  ? "bg-[#c8ff00]/15 text-[#c8ff00] border-[#c8ff00] shadow-[0_0_12px_rgba(200,255,0,0.25)]"
+                  : "bg-[#1c0336] text-[#b8a9cf] border-[#360866] hover:text-white hover:border-[#9860ff]/50"
+              }`}
+              title={sfxEnabled ? "Mute Cybernetic Audio SFX" : "Enable Cybernetic Audio SFX"}
+            >
+              {sfxEnabled ? (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-[#c8ff00] animate-pulse" />
+                  <span className="text-[10px] tracking-wider font-bold">SFX: ON</span>
+                  <span className="flex items-end gap-0.5 h-3 ml-0.5">
+                    <span className="w-0.5 h-1.5 bg-[#c8ff00] animate-bounce" />
+                    <span className="w-0.5 h-3 bg-[#c8ff00] animate-pulse" />
+                    <span className="w-0.5 h-2 bg-[#c8ff00] animate-bounce" />
+                  </span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-3.5 h-3.5 opacity-60" />
+                  <span className="text-[10px] tracking-wider opacity-75">SFX: OFF</span>
+                </>
+              )}
+            </button>
+
             <MagneticButton
               href="/#contact"
-              onClick={() => handleScrollClick('/#contact')}
+              onClick={() => {
+                soundEngine.playClick();
+                handleScrollClick('/#contact');
+              }}
               className="btn-1minus1 text-xs py-2.5 px-5"
             >
               <span>Get in Touch</span>
@@ -103,13 +162,33 @@ export const Navbar = () => {
           {/* Mobile menu toggle button */}
           <div className="flex sm:hidden items-center space-x-2">
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={toggleSfx}
+              className={`p-2 rounded-xl border text-xs ${
+                sfxEnabled ? "text-[#c8ff00] border-[#c8ff00] bg-[#c8ff00]/10" : "text-[#b8a9cf] border-[#360866] bg-[#1c0336]"
+              }`}
+              title="Toggle Audio"
+            >
+              {sfxEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
+            <button
+              onClick={() => {
+                soundEngine.playClick();
+                setIsOpen(!isOpen);
+              }}
               className="p-2.5 rounded-xl bg-[#26024a] text-white border border-[#9860ff]/30 hover:border-[#c8ff00] transition-colors"
               aria-label="Toggle navigation menu"
             >
               {isOpen ? <X className="w-5 h-5 text-[#c8ff00]" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
+        </div>
+
+        {/* Dynamic Lenis Scroll Progress Line */}
+        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-transparent overflow-hidden">
+          <div 
+            className="h-full bg-[#c8ff00] shadow-[0_0_10px_#c8ff00] transition-[width] duration-150 ease-out"
+            style={{ width: `${scrollProgress}%` }}
+          />
         </div>
 
         {/* Mobile Dropdown Menu */}

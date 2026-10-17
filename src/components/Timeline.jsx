@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { timelineData } from '../data/timelineData';
 import { Baby, Code, BookOpen, Building, Award, GraduationCap, Briefcase, MapPin, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 const iconMap = {
   Baby,
@@ -16,10 +18,12 @@ export const Timeline = () => {
   const [activeIndex, setActiveIndex] = useState(timelineData.length - 1); // Start with latest
 
   const handleNext = () => {
+    soundEngine.playSwitch();
     setActiveIndex((prev) => (prev + 1) % timelineData.length);
   };
 
   const handlePrev = () => {
+    soundEngine.playSwitch();
     setActiveIndex((prev) => (prev - 1 + timelineData.length) % timelineData.length);
   };
 
@@ -27,8 +31,12 @@ export const Timeline = () => {
   const IconComponent = iconMap[activeMilestone.iconName] || Code;
 
   return (
-    <section id="timeline" className="py-20 sm:py-28 bg-[#180230]/70 border-y border-[#26024a] relative">
-      <div className="section-container">
+    <section id="timeline" className="py-20 sm:py-28 bg-[#180230]/70 border-y border-[#26024a] relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:04 // TRAJECTORY]</div>
+      <div className="tech-crosshair top-6 right-6">+ [CHRONOLOGY // TURNING_POINTS]</div>
+
+      <div className="section-container relative z-10">
         
         {/* Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -44,9 +52,9 @@ export const Timeline = () => {
           </p>
         </div>
 
-        {/* Featured Milestone Card */}
+        {/* Featured Milestone Card with SpotlightCard */}
         <div className="max-w-4xl mx-auto mb-14">
-          <div className="p-8 sm:p-12 rounded-3xl border border-[#360866] shadow-[0_0_50px_rgba(0,0,0,0.6)] bg-[#190230]/90 relative overflow-hidden text-left">
+          <SpotlightCard className="p-8 sm:p-12 shadow-[0_0_50px_rgba(0,0,0,0.6)] text-left">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#2a0453]">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-2xl bg-[#c8ff00] text-[#140128] flex items-center justify-center shadow-[0_0_20px_rgba(200,255,0,0.3)]">
@@ -88,6 +96,7 @@ export const Timeline = () => {
                 <div className="flex items-center space-x-3">
                   <button
                     onClick={handlePrev}
+                    onMouseEnter={() => soundEngine.playHover()}
                     className="p-3 rounded-full border border-[#9860ff]/40 bg-[#1c0336] hover:border-[#c8ff00] hover:text-[#c8ff00] text-white transition-colors"
                     aria-label="Previous milestone"
                   >
@@ -95,6 +104,7 @@ export const Timeline = () => {
                   </button>
                   <button
                     onClick={handleNext}
+                    onMouseEnter={() => soundEngine.playHover()}
                     className="p-3 rounded-full border border-[#9860ff]/40 bg-[#1c0336] hover:border-[#c8ff00] hover:text-[#c8ff00] text-white transition-colors"
                     aria-label="Next milestone"
                   >
@@ -103,7 +113,7 @@ export const Timeline = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </SpotlightCard>
         </div>
 
         {/* Milestone Horizontal Track */}
@@ -116,7 +126,11 @@ export const Timeline = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveIndex(idx)}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  onClick={() => {
+                    soundEngine.playSwitch();
+                    setActiveIndex(idx);
+                  }}
                   className={`relative z-10 flex flex-col items-center group focus:outline-none transition-all duration-200 ${
                     isActive ? "scale-115" : "opacity-60 hover:opacity-100"
                   }`}

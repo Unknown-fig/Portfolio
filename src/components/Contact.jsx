@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Mail, MapPin, Send, Github, Linkedin, Instagram, Languages } from 'lucide-react';
 import { toast } from 'sonner';
 import { MagneticButton } from './ui/MagneticButton';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -16,6 +18,7 @@ export const Contact = () => {
 
     setIsSubmitting(true);
     setTimeout(() => {
+      soundEngine.playSuccess();
       toast.success("Message transmitted successfully!", {
         description: "I'll get back to you soon. Thanks for reaching out!",
       });
@@ -25,8 +28,12 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-[#180230]/70 border-t border-[#26024a] relative">
-      <div className="section-container">
+    <section id="contact" className="py-20 sm:py-28 bg-[#180230]/70 border-t border-[#26024a] relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:06 // COMMUNICATIONS]</div>
+      <div className="tech-crosshair top-6 right-6">+ [FREQUENCY // OPEN_SIGNAL]</div>
+
+      <div className="section-container relative z-10">
         
         {/* Title */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -122,9 +129,9 @@ export const Contact = () => {
             </div>
           </div>
 
-          {/* Interactive Contact Form */}
+          {/* Interactive Contact Form with SpotlightCard */}
           <div className="lg:col-span-7">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#190230]/90 border border-[#360866] shadow-[0_0_50px_rgba(0,0,0,0.6)] text-left">
+            <SpotlightCard className="p-8 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.6)] text-left">
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="block text-xs font-pixel uppercase tracking-wider text-[#9860ff] mb-2">
@@ -134,6 +141,7 @@ export const Contact = () => {
                     type="text"
                     required
                     value={formData.name}
+                    onFocus={() => soundEngine.playHover()}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Maya Lin"
                     className="w-full px-5 py-3.5 rounded-2xl border border-[#360866] bg-[#140128] text-white text-sm focus:outline-none focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] transition-colors placeholder:text-[#b8a9cf]/40 font-mono"
@@ -148,6 +156,7 @@ export const Contact = () => {
                     type="email"
                     required
                     value={formData.email}
+                    onFocus={() => soundEngine.playHover()}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="name@organization.com"
                     className="w-full px-5 py-3.5 rounded-2xl border border-[#360866] bg-[#140128] text-white text-sm focus:outline-none focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] transition-colors placeholder:text-[#b8a9cf]/40 font-mono"
@@ -162,6 +171,7 @@ export const Contact = () => {
                     required
                     rows={4}
                     value={formData.message}
+                    onFocus={() => soundEngine.playHover()}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Tell me about your build, collaboration idea, or opportunity..."
                     className="w-full px-5 py-3.5 rounded-2xl border border-[#360866] bg-[#140128] text-white text-sm focus:outline-none focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] transition-colors resize-none placeholder:text-[#b8a9cf]/40 font-mono"
@@ -171,6 +181,7 @@ export const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
+                  onMouseEnter={() => soundEngine.playHover()}
                   className="w-full btn-1minus1 text-xs py-4 justify-center"
                 >
                   {isSubmitting ? (
@@ -183,7 +194,7 @@ export const Contact = () => {
                   )}
                 </button>
               </form>
-            </div>
+            </SpotlightCard>
           </div>
 
         </div>

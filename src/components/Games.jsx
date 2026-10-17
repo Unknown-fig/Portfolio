@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { Button } from './ui/Button';
 import { Gamepad2, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, RotateCcw } from 'lucide-react';
+import { soundEngine } from '../utils/soundEngine';
 
 const diceIcons = [Dice1, Dice2, Dice3, Dice4, Dice5, Dice6];
 
@@ -27,16 +28,21 @@ export const TicTacToe = () => {
 
   const handleClick = (index) => {
     if (board[index] || winner) return;
+    soundEngine.playClick();
     const nextBoard = [...board];
     nextBoard[index] = isXNext ? 'X' : 'O';
     setBoard(nextBoard);
     setIsXNext(!isXNext);
 
     const win = checkWinner(nextBoard);
-    if (win) setWinner(win);
+    if (win) {
+      soundEngine.playSuccess();
+      setWinner(win);
+    }
   };
 
   const handleReset = () => {
+    soundEngine.playSwitch();
     setBoard(Array(9).fill(null));
     setIsXNext(true);
     setWinner(null);
@@ -240,8 +246,12 @@ export const Games = () => {
   const [activeTab, setActiveTab] = useState('tictactoe');
 
   return (
-    <section id="games" className="py-20 sm:py-28 relative">
-      <div className="section-container">
+    <section id="games" className="py-20 sm:py-28 relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:05 // ARCADE_VAULT]</div>
+      <div className="tech-crosshair top-6 right-6">+ [INTERACTIVE // EXPERIMENTS]</div>
+
+      <div className="section-container relative z-10">
         
         {/* Title */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -259,7 +269,11 @@ export const Games = () => {
           {/* Game Switcher Tabs */}
           <div className="inline-flex p-1.5 bg-[#1c0336] rounded-full mt-6 border border-[#360866]">
             <button
-              onClick={() => setActiveTab('tictactoe')}
+              onMouseEnter={() => soundEngine.playHover()}
+              onClick={() => {
+                soundEngine.playSwitch();
+                setActiveTab('tictactoe');
+              }}
               className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'tictactoe'
                   ? 'bg-[#c8ff00] text-[#140128] shadow-[0_0_15px_rgba(200,255,0,0.3)] font-black'
@@ -269,7 +283,11 @@ export const Games = () => {
               Tic Tac Toe
             </button>
             <button
-              onClick={() => setActiveTab('snakeandladder')}
+              onMouseEnter={() => soundEngine.playHover()}
+              onClick={() => {
+                soundEngine.playSwitch();
+                setActiveTab('snakeandladder');
+              }}
               className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'snakeandladder'
                   ? 'bg-[#c8ff00] text-[#140128] shadow-[0_0_15px_rgba(200,255,0,0.3)] font-black'

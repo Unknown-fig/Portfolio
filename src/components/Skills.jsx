@@ -10,6 +10,8 @@ import {
   Compass, 
   ShieldCheck 
 } from 'lucide-react';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Skills = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -119,8 +121,12 @@ export const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 sm:py-28 relative">
-      <div className="section-container">
+    <section id="skills" className="py-20 sm:py-28 relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:02 // TECH_MATRIX]</div>
+      <div className="tech-crosshair top-6 right-6">+ [STACK // ACTIVE_ARSENAL]</div>
+
+      <div className="section-container relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -140,7 +146,11 @@ export const Skills = () => {
             {categories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
+                onMouseEnter={() => soundEngine.playHover()}
+                onClick={() => {
+                  soundEngine.playSwitch();
+                  setActiveTab(cat.id);
+                }}
                 className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 select-none border ${
                   activeTab === cat.id
                     ? "bg-[#c8ff00] text-[#140128] border-[#c8ff00] shadow-[0_0_20px_rgba(200,255,0,0.3)] scale-[1.02]"
@@ -153,12 +163,13 @@ export const Skills = () => {
           </div>
         </div>
 
-        {/* Tools Cards Grid */}
+        {/* Tools Cards Grid with SpotlightCard */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 text-left">
           {filteredTools.map((tool) => (
-            <div 
+            <SpotlightCard 
               key={tool.name} 
-              className="bg-[#190230]/80 p-6 border border-[#360866] hover:border-[#c8ff00]/60 hover:shadow-[0_0_35px_rgba(200,255,0,0.12)] rounded-3xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              onMouseEnter={() => soundEngine.playHover()}
+              className="p-6 transition-all duration-300 group hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
@@ -176,12 +187,12 @@ export const Skills = () => {
                   {tool.note}
                 </p>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 
-        {/* Engineering Philosophy Ribbon */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#190230]/90 border border-[#360866] shadow-[0_0_50px_rgba(0,0,0,0.5)] text-left">
+        {/* Engineering Philosophy Ribbon with SpotlightCard */}
+        <SpotlightCard className="p-8 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] text-left">
           <div className="flex items-center gap-2.5 text-xs font-pixel font-bold uppercase tracking-wider text-[#c8ff00] mb-6">
             <Compass className="w-4 h-4" />
             <span>ENGINEERING PRINCIPLES I BUILD BY</span>
@@ -205,7 +216,7 @@ export const Skills = () => {
               );
             })}
           </div>
-        </div>
+        </SpotlightCard>
 
       </div>
     </section>

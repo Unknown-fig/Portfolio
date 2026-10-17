@@ -15,6 +15,8 @@ import {
   ArrowUpRight 
 } from 'lucide-react';
 import { projectsData, projectCategories } from '../data/projectsData';
+import { SpotlightCard } from './ui/SpotlightCard';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -56,8 +58,12 @@ export const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 sm:py-28 relative">
-      <div className="section-container">
+    <section id="projects" className="py-20 sm:py-28 relative overflow-hidden">
+      {/* Blueprint Crosshairs & Coordinate Tags */}
+      <div className="tech-crosshair top-6 left-6">+ [SYS:03 // PRODUCTION_BUILDS]</div>
+      <div className="tech-crosshair top-6 right-6">+ [REPOSITORIES // 11_ACTIVE]</div>
+
+      <div className="section-container relative z-10">
         
         {/* Section Title & Header */}
         <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
@@ -104,7 +110,11 @@ export const Projects = () => {
               return (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onMouseEnter={() => soundEngine.playHover()}
+                  onClick={() => {
+                    soundEngine.playSwitch();
+                    setSelectedCategory(category);
+                  }}
                   className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 select-none flex items-center gap-2 border ${
                     isSelected
                       ? "bg-[#c8ff00] text-[#140128] border-[#c8ff00] shadow-[0_0_20px_rgba(200,255,0,0.3)] scale-[1.02]"
@@ -169,17 +179,21 @@ export const Projects = () => {
           </div>
         )}
 
-        {/* Projects Grid */}
+        {/* Projects Grid with SpotlightCard */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <div
+            <SpotlightCard
               key={project.id}
-              className="group flex flex-col overflow-hidden bg-[#1c0336]/80 border border-[#360866] hover:border-[#c8ff00]/60 hover:shadow-[0_0_40px_rgba(200,255,0,0.15)] hover:-translate-y-2 rounded-3xl transition-all duration-300"
+              onMouseEnter={() => soundEngine.playHover()}
+              className="group flex flex-col overflow-hidden hover:-translate-y-2 transition-all duration-300"
             >
               {/* Card Image Banner */}
               <div 
                 className="relative h-52 w-full overflow-hidden bg-[#140128] cursor-pointer"
-                onClick={() => setActiveModalProject(project)}
+                onClick={() => {
+                  soundEngine.playClick();
+                  setActiveModalProject(project);
+                }}
               >
                 <img
                   src={project.image}
@@ -217,7 +231,10 @@ export const Projects = () => {
                 <div>
                   {/* Title */}
                   <h3 
-                    onClick={() => setActiveModalProject(project)}
+                    onClick={() => {
+                      soundEngine.playClick();
+                      setActiveModalProject(project);
+                    }}
                     className="text-xl font-display font-black text-white group-hover:text-[#c8ff00] transition-colors cursor-pointer mb-2.5 leading-snug line-clamp-1 uppercase tracking-tight"
                   >
                     {project.title}
@@ -269,6 +286,7 @@ export const Projects = () => {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => soundEngine.playClick()}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#c8ff00] text-[#140128] hover:bg-white text-xs font-black uppercase tracking-wider shadow-sm transition-all duration-200"
                   >
                     <Github className="w-3.5 h-3.5" />
@@ -276,14 +294,17 @@ export const Projects = () => {
                   </a>
 
                   <button
-                    onClick={() => setActiveModalProject(project)}
+                    onClick={() => {
+                      soundEngine.playClick();
+                      setActiveModalProject(project);
+                    }}
                     className="px-4 py-2.5 rounded-full border border-[#9860ff]/40 bg-[#26024a]/80 hover:border-[#c8ff00] hover:text-[#c8ff00] text-white text-xs font-bold uppercase tracking-wider transition-colors"
                   >
                     Specs
                   </button>
                 </div>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronUp, Zap } from 'lucide-react';
+import { soundEngine } from '../utils/soundEngine';
 
 export const Footer = () => {
   const scrollToTop = () => {
+    soundEngine.playSuccess();
     if (window.$lenis) {
       window.$lenis.scrollTo(0);
     } else {
