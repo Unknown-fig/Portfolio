@@ -62,12 +62,10 @@ export const Projects = () => {
       <div className="section-container">
         
         {/* Section Title & Header */}
-        <div className="flex flex-col items-start mb-10 sm:mb-14">
-          <div className="pulse-chip mb-4">
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white text-xs font-bold mr-2">
-              04
-            </span>
-            <span>Featured Engineering Work</span>
+        <div className="flex flex-col items-start mb-10 sm:mb-14 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-semibold text-primary mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Handcrafted Projects & Software</span>
           </div>
           
           <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-4">
@@ -234,8 +232,15 @@ export const Projects = () => {
                     {project.description}
                   </p>
 
+                  {/* Human Story Note */}
+                  {project.story && (
+                    <div className="p-2.5 rounded-xl bg-primary/5 border border-primary/15 text-[11px] text-foreground/90 italic mb-4 line-clamp-2 text-left">
+                      💡 "{project.story}"
+                    </div>
+                  )}
+
                   {/* Highlights Bullet List */}
-                  <div className="space-y-1.5 mb-5">
+                  <div className="space-y-1.5 mb-5 text-left">
                     {project.highlights.slice(0, 2).map((highlight, idx) => (
                       <div key={idx} className="flex items-start text-xs text-muted-foreground/90 leading-tight gap-2">
                         <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
@@ -372,10 +377,23 @@ export const Projects = () => {
 
             {/* Modal Body */}
             <div className="p-6 sm:p-8 space-y-6 flex-1 pb-[max(1.75rem,env(safe-area-inset-bottom))]">
+              {/* Human Story Callout */}
+              {activeModalProject.story && (
+                <div className="p-4 sm:p-5 rounded-2xl bg-primary/5 border border-primary/20 text-left">
+                  <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Why I Built This</span>
+                  </div>
+                  <p className="text-sm sm:text-base text-foreground/90 italic leading-relaxed">
+                    "{activeModalProject.story}"
+                  </p>
+                </div>
+              )}
+
               {/* Description */}
-              <div>
+              <div className="text-left">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
-                  Project Overview
+                  Technical Architecture
                 </h4>
                 <p className="text-sm sm:text-base text-foreground/90 leading-relaxed">
                   {activeModalProject.description}

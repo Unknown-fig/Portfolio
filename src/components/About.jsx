@@ -1,144 +1,155 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Compass } from 'lucide-react';
+import { 
+  Sparkles, 
+  Terminal, 
+  Cpu, 
+  Heart, 
+  Code, 
+  Headphones, 
+  Coffee, 
+  BookOpen, 
+  ArrowRight,
+  Lightbulb
+} from 'lucide-react';
+import { Card, CardContent } from './ui/Card';
 
 export const About = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
 
-  const cards = [
+  const stories = [
     {
-      title: "B.Tech AI Student & Ex-Intern @ Scaler",
-      description: "First-year B.Tech in Artificial Intelligence student at ITS Engineering College, Greater Noida (2026–2030). Completed hands-on internships at Scaler School of Technology and actively engaged with Nexstep Network.",
-      background: "url('/background-section1.png')",
-      backgroundPosition: "top center",
-      tag: "Academic & Industry",
+      title: "The Spark: Inspecting Elements at Age 9",
+      tag: "Where it began",
+      content: "I still remember the feeling of pressing F12 in a browser for the first time as a kid, changing a website's headline, and realizing software wasn't immutable magic—it was written by people, and I could write it too. What started as childhood curiosity with HTML tags evolved into building full-stack web applications and low-level system software.",
+      quote: "Curiosity is the best debugger.",
     },
     {
-      title: "Python for ML & Prompt Engineering",
-      description: "Dedicated to exploring how AI systems work and where they can break. Specializing in Python for machine learning, model testing, and precision prompt engineering to build smart, data-driven solutions.",
-      background: "url('/background-section2.png')",
-      backgroundPosition: "center",
-      tag: "AI & ML Core",
+      title: "Why Low-Level & C Language?",
+      tag: "Systems Thinking",
+      content: "While many developers rush exclusively to high-level frameworks and API wrappers, I wanted to understand memory addresses, pointers, struct padding, and how CPUs actually execute instructions. Diving into C gave me deep respect for hardware efficiency and made every higher-level language feel completely transparent.",
+      quote: "If you understand pointers and memory, no framework will ever scare you.",
     },
     {
-      title: "Cybersecurity & Building the future",
-      description: "Combining low-level C programming with cybersecurity and ethical hacking principles. Learning by building and testing ideas — whether working with models or fortifying digital systems.",
-      background: "url('/background-section3.png')",
-      backgroundPosition: "bottom center",
-      highlight: "future",
-      tag: "Security Vision",
+      title: "Scaler School of Technology Crucible",
+      tag: "Industry Mentorship",
+      content: "Completing competitive internships across multiple cohorts at Scaler School of Technology shaped how I think as an engineer. Working with industry mentors pushed me past 'code that just works' toward engineering rigor: clean architecture, edge-case validation, code reviews, and designing systems that scale.",
+      quote: "Great software is written for humans to read, and computers to execute.",
+    },
+    {
+      title: "The Maker's Itch: Building Real Things",
+      tag: "Open Source Craft",
+      content: "I don't just write scripts for classroom assignments—I build software I personally want to use every day: a 3D hand-gesture air canvas so anyone can sculpt in mid-air, an IoT gas leak detection pipeline to keep lab environments safe, and a self-hosted audio streaming server with synchronized lyrics.",
+      quote: "Build what you wish existed.",
     },
   ];
 
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % cards.length);
-  };
-
-  const handlePrev = (e) => {
-    e.stopPropagation();
-    setActiveIndex((prev) => (prev - 1 + cards.length) % cards.length);
-  };
-
-  const current = cards[activeIndex];
+  const quickFacts = [
+    { icon: Terminal, label: "Daily Tools", value: "Neovim, VS Code, Git, Linux Terminal" },
+    { icon: Headphones, label: "Focus Soundtrack", value: "Lo-Fi Instrumental & Synthwave" },
+    { icon: Coffee, label: "Daily Fuel", value: "Hot Chai & Curiosity" },
+    { icon: BookOpen, label: "Reading Now", value: "Operating Systems & Computer Architecture" },
+  ];
 
   return (
     <section id="about" className="py-16 sm:py-24 bg-card/40 border-y border-border/40 relative">
       <div className="section-container">
         
-        {/* Header */}
-        <div className="flex flex-col items-start mb-8 sm:mb-12">
-          <div className="pulse-chip mb-4">
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white text-xs font-bold mr-2">
-              02
-            </span>
-            <span>About</span>
+        {/* Section Header */}
+        <div className="flex flex-col items-start mb-10 sm:mb-14 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-semibold text-primary mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Behind the Screen & The Story</span>
           </div>
-          <h2 className="section-title text-foreground mb-3">
-            My Journey & Background
+          <h2 className="section-title text-foreground mb-4">
+            A Bit More About Me
           </h2>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            Tap the card to explore my profile ({activeIndex + 1} of {cards.length})
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+            Beyond the resume bullet points: how I got into software, why I care about low-level systems, and what keeps me building late at night.
           </p>
         </div>
 
-        {/* Interactive 3D Perspective Card Container */}
-        <div className="relative max-w-4xl mx-auto perspective-1000">
-          <div
-            onClick={handleNext}
-            className="relative min-h-[360px] sm:min-h-[420px] md:min-h-[460px] rounded-3xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-500 hover:shadow-orange-500/10 hover:border-primary/50 border border-border group"
-            style={{
-              backgroundImage: current.background,
-              backgroundSize: 'cover',
-              backgroundPosition: current.backgroundPosition,
-            }}
-          >
-            {/* Dark gradient overlay for readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 z-10" />
+        {/* Interactive Story Tabs + Content Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-14 text-left">
+          
+          {/* Left: Story Selection Pills */}
+          <div className="lg:col-span-5 flex flex-col space-y-2.5">
+            {stories.map((story, idx) => {
+              const isSelected = activeStoryIndex === idx;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => setActiveStoryIndex(idx)}
+                  className={`p-4 rounded-2xl text-left transition-all duration-200 spring-press border flex flex-col gap-1 ${
+                    isSelected
+                      ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20 scale-[1.01]"
+                      : "glass-specular text-muted-foreground border-border/70 hover:text-foreground hover:border-primary/40"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`text-[11px] font-mono uppercase font-bold tracking-wider ${isSelected ? 'text-primary-foreground/80' : 'text-primary'}`}>
+                      {story.tag}
+                    </span>
+                    <span className="text-xs opacity-60">0{idx + 1}</span>
+                  </div>
+                  <div className={`font-bold text-sm sm:text-base ${isSelected ? 'text-white' : 'text-foreground'}`}>
+                    {story.title}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* Top Tag Pill */}
-            <div className="absolute top-6 right-6 z-20">
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-medium border border-white/20">
-                <Compass className="w-3.5 h-3.5" />
-                {current.tag}
-              </span>
-            </div>
-
-            {/* Bottom Content Area */}
-            <div className="absolute inset-0 z-20 p-6 sm:p-10 md:p-12 flex flex-col justify-end max-w-2xl">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-display text-white font-bold leading-tight mb-4 group-hover:translate-x-1 transition-transform duration-200">
-                {current.highlight ? (
-                  <>
-                    {current.title.split(current.highlight)[0]}
-                    <span className="text-[#FE5C02]">{current.highlight}</span>
-                    {current.title.split(current.highlight)[1]}
-                  </>
-                ) : (
-                  current.title
-                )}
-              </h3>
-              <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-6">
-                {current.description}
-              </p>
-
-              {/* Card Pagination indicators */}
-              <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <div className="flex space-x-2">
-                  {cards.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveIndex(idx);
-                      }}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        idx === activeIndex ? "w-8 bg-primary" : "w-2 bg-white/40 hover:bg-white/70"
-                      }`}
-                      aria-label={`Go to slide ${idx + 1}`}
-                    />
-                  ))}
+          {/* Right: Active Story Card Display */}
+          <div className="lg:col-span-7">
+            <Card className="glass-specular p-6 sm:p-8 rounded-3xl border-border/70 h-full flex flex-col justify-between shadow-xl">
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-primary uppercase tracking-wider">
+                  <Lightbulb className="w-4 h-4" />
+                  <span>{stories[activeStoryIndex].tag}</span>
                 </div>
+                
+                <h3 className="text-2xl font-bold text-foreground font-display">
+                  {stories[activeStoryIndex].title}
+                </h3>
 
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={handlePrev}
-                    className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center hover:bg-white/25 transition-colors"
-                    aria-label="Previous card"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleNext();
-                    }}
-                    className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center hover:bg-white/25 transition-colors"
-                    aria-label="Next card"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
+                <p className="text-sm sm:text-base text-foreground/85 leading-relaxed">
+                  {stories[activeStoryIndex].content}
+                </p>
+              </div>
+
+              {/* Story Quote Badge */}
+              <div className="mt-8 pt-5 border-t border-border/60 flex items-center gap-3 italic text-xs sm:text-sm text-primary font-medium">
+                <span className="text-2xl text-primary/40 font-serif leading-none">“</span>
+                <span>{stories[activeStoryIndex].quote}</span>
+              </div>
+            </Card>
+          </div>
+
+        </div>
+
+        {/* Quick Personal Facts Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+          {quickFacts.map((fact, idx) => {
+            const Icon = fact.icon;
+            return (
+              <div 
+                key={idx} 
+                className="p-4 rounded-2xl glass-specular border border-border/60 flex items-center gap-3.5 shadow-sm"
+              >
+                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                    {fact.label}
+                  </div>
+                  <div className="text-xs sm:text-sm font-semibold text-foreground mt-0.5 line-clamp-1">
+                    {fact.value}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
       </div>

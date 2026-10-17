@@ -1,135 +1,196 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { ArrowRight, Sparkles, Terminal, GraduationCap } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  ArrowRight, 
+  Terminal, 
+  GraduationCap, 
+  MapPin, 
+  Copy, 
+  Check, 
+  Code2, 
+  Coffee, 
+  Flame, 
+  Sparkles 
+} from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const Hero = () => {
-  const containerRef = useRef(null);
-  const cardRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const [chaiCount, setChaiCount] = useState(42);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('speedrunner0007@gmail.com');
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2000);
+  };
 
-  useEffect(() => {
-    if (isMobile) return;
-    const container = containerRef.current;
-    const card = cardRef.current;
-    if (!container || !card) return;
-
-    const handleMouseMove = (e) => {
-      const { left, top, width, height } = container.getBoundingClientRect();
-      const dx = (e.clientX - left) / width - 0.5;
-      const dy = (e.clientY - top) / height - 0.5;
-      card.style.transform = `perspective(1000px) rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg) scale3d(1.02, 1.02, 1.02)`;
-    };
-
-    const handleMouseLeave = () => {
-      card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)';
-    };
-
-    container.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      container.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, [isMobile]);
+  const handleChaiClick = () => {
+    setChaiCount((prev) => prev + 1);
+  };
 
   return (
-    <section className="relative pt-28 pb-12 sm:pt-36 sm:pb-16 overflow-hidden">
+    <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 overflow-hidden">
       <div className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Left Column: Hero Text */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+          {/* Left Column: Personal Human Story & Intro */}
+          <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
             
-            {/* 01 Portfolio Tag */}
-            <div className="pulse-chip opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white text-xs font-bold mr-2">
-                01
+            {/* Live Availability Pill */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-medium text-foreground shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              <span>Portfolio</span>
+              <span className="font-medium text-foreground">Available for Collaborations</span>
+              <span className="text-muted-foreground/60">•</span>
+              <span className="text-muted-foreground flex items-center gap-1">
+                <MapPin className="w-3 h-3 text-primary" />
+                Greater Noida, India
+              </span>
             </div>
 
-            {/* Main Headline */}
-            <div className="space-y-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.25s' }}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold tracking-wide mb-1 border border-primary/20">
-                <Sparkles className="w-3.5 h-3.5 text-primary shrink-0" />
-                <span>AI/ML Enthusiast | Python & Machine Learning | Ex-Intern @ Scaler School of Technology | Cybersecurity & Prompt Engineering</span>
-              </div>
+            {/* Main Name & Headline */}
+            <div className="space-y-3">
               <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-foreground tracking-tight leading-[1.1]">
-                Utsab Mukharjee
+                Hey, I'm <span className="text-primary underline decoration-primary/30 decoration-wavy decoration-2">Utsab Mukharjee</span> 👋
               </h1>
-              <p className="text-primary font-medium text-base sm:text-lg flex items-center gap-2">
-                <GraduationCap className="w-5 h-5 shrink-0" />
-                B.Tech in Artificial Intelligence (August 2026 – August 2030) • ITS Engineering College, Greater Noida
+              <p className="text-xl sm:text-2xl font-semibold text-foreground/90 leading-snug">
+                First-year AI student, low-level C explorer, and pragmatic builder.
               </p>
             </div>
 
-            {/* Subheadline & Bio from LinkedIn (Verbatim) */}
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl opacity-0 animate-fade-in text-left" style={{ animationDelay: '0.4s' }}>
-              I’m a first-year engineering student, and I spend a lot of time exploring how AI systems work and where they can break. My focus is on <strong className="text-foreground">Python for ML</strong>, <strong className="text-foreground">machine learning fundamentals</strong>, and <strong className="text-foreground">prompt engineering</strong>, with a growing interest in <strong className="text-foreground">cybersecurity and ethical hacking</strong>. I’ve also completed an internship at <strong className="text-foreground">Scaler School of Technology</strong> and stay involved as a member of <strong className="text-foreground">Nexstep Network</strong>. I like learning by building and testing ideas, whether that means working with models, studying security basics, or figuring out how to ask better questions of AI tools.
+            {/* Authentic Human Bio */}
+            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl">
+              I love taking complex systems apart to understand how they work under the hood. 
+              Whether that's diving into <strong className="text-foreground">pointer arithmetic in C</strong>, wiring up <strong className="text-foreground">Arduino gas sensors for IoT</strong>, crafting <strong className="text-foreground">3D hand-tracking air canvases</strong>, or stress-testing AI models—I learn best by breaking, building, and shipping open-source software.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto opacity-0 animate-fade-in" style={{ animationDelay: '0.55s' }}>
+            {/* Credential Tags */}
+            <div className="flex flex-wrap gap-2 pt-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
+                <GraduationCap className="w-3.5 h-3.5 text-primary" />
+                B.Tech AI @ ITS Engineering College (2026–2030)
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                Ex-Intern @ Scaler School of Technology
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
+                <Code2 className="w-3.5 h-3.5 text-blue-500" />
+                11 Open-Source Repositories
+              </span>
+            </div>
+
+            {/* Primary Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
               <a
-                href="#about"
-                className="inline-flex items-center justify-center group text-center transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-95 font-semibold text-white px-7 py-3.5 rounded-full shadow-lg"
-                style={{ backgroundColor: '#FE5C02' }}
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all active:scale-[0.97]"
               >
-                <span>Explore My Work</span>
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" />
+                <span>See My Projects</span>
+                <ArrowRight className="w-4 h-4" />
               </a>
+
+              <Button
+                variant="outline"
+                size="default"
+                onClick={handleCopyEmail}
+                className="gap-2 px-5 py-3.5 h-auto text-sm border-border bg-card/80 hover:bg-accent text-foreground"
+              >
+                {copiedEmail ? (
+                  <>
+                    <Check className="w-4 h-4 text-emerald-500" />
+                    <span>Email Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 text-muted-foreground" />
+                    <span>speedrunner0007@gmail.com</span>
+                  </>
+                )}
+              </Button>
+
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full border border-border bg-card/60 backdrop-blur-sm text-foreground hover:bg-accent transition-colors font-medium text-sm"
+                className="px-4 py-3.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Terminal className="w-4 h-4 mr-2 text-primary" />
-                Connect with Me
+                Get in touch →
               </a>
             </div>
 
           </div>
 
-          {/* Right Column: 3D Interactive Futuristic Stage */}
-          <div className="lg:col-span-5 flex justify-center" ref={containerRef}>
-            <div
-              ref={cardRef}
-              className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-border/60 bg-gradient-to-br from-card to-muted/40 transition-transform duration-150 ease-out flex items-center justify-center"
-              style={{
-                backgroundImage: 'url(/Header-background.webp)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            >
-              {/* Overlay glow */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent pointer-events-none" />
-
-              {/* Character Avatar */}
-              <img
-                src="/robot-hero.png"
-                alt="Futuristic Robot Cyberpunk Graphic"
-                className="relative z-10 w-4/5 max-h-[85%] object-contain drop-shadow-[0_20px_40px_rgba(254,92,2,0.3)] transition-transform duration-300 hover:scale-105"
-                loading="eager"
-              />
-
-              {/* Status Badge floating at bottom */}
-              <div className="absolute bottom-6 left-6 right-6 z-20 bg-background/85 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-lg flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-medium text-muted-foreground">Current Program</div>
-                  <div className="text-sm font-bold text-foreground">B.Tech Artificial Intelligence</div>
-                  <div className="text-[11px] text-primary">ITS Engineering College, Greater Noida</div>
+          {/* Right Column: Authentic "Now & Workbench" Card */}
+          <div className="lg:col-span-5 flex justify-center w-full">
+            <div className="w-full max-w-md rounded-3xl glass-specular border border-border/80 p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-5">
+              
+              {/* Card Header with Terminal Controls */}
+              <div className="flex items-center justify-between pb-4 border-b border-border/60">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                  <span className="text-xs font-mono text-muted-foreground ml-2">
+                    utsab@developer-desk: ~
+                  </span>
                 </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  Active
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-primary/10 text-primary font-semibold">
+                  bash
+                </span>
+              </div>
+
+              {/* Terminal Snippet */}
+              <div className="font-mono text-xs space-y-2.5 bg-muted/40 p-4 rounded-2xl border border-border/50 text-left">
+                <div className="text-muted-foreground">
+                  <span className="text-primary font-bold">$</span> cat ~/.currently_building
+                </div>
+                <div className="text-foreground pl-3 border-l-2 border-primary/50 space-y-1">
+                  <div>• <span className="font-semibold text-foreground">AirCanvas:</span> 3D gesture tracking in browser</div>
+                  <div>• <span className="font-semibold text-foreground">C Systems:</span> Memory allocators & pointers</div>
+                  <div>• <span className="font-semibold text-foreground">IoT Sentinel:</span> Arduino MQ-4 gas telemetry</div>
+                </div>
+                <div className="text-muted-foreground pt-1">
+                  <span className="text-primary font-bold">$</span> echo $ENGINEERING_RULE
+                </div>
+                <div className="text-primary font-semibold pl-3 border-l-2 border-primary/50 text-[11px]">
+                  "Zero speculative bloat. Build to understand."
                 </div>
               </div>
+
+              {/* Personal Human Badges */}
+              <div className="grid grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-card/60 border border-border/60 text-left">
+                  <div className="text-[11px] text-muted-foreground font-medium">Focus Area</div>
+                  <div className="text-xs font-bold text-foreground mt-0.5">AI/ML & Systems</div>
+                </div>
+                <div className="p-3 rounded-xl bg-card/60 border border-border/60 text-left">
+                  <div className="text-[11px] text-muted-foreground font-medium">GitHub</div>
+                  <a 
+                    href="https://github.com/Unknown-fig" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-xs font-bold text-primary hover:underline mt-0.5 block truncate"
+                  >
+                    @Unknown-fig ↗
+                  </a>
+                </div>
+              </div>
+
+              {/* Interactive Chai Easter Egg */}
+              <div 
+                onClick={handleChaiClick}
+                className="flex items-center justify-between p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 cursor-pointer hover:bg-amber-500/15 transition-all select-none group"
+                title="Click to add another cup of chai to the counter!"
+              >
+                <div className="flex items-center gap-2.5 text-xs text-amber-700 dark:text-amber-300 font-medium">
+                  <Coffee className="w-4 h-4 text-amber-500 group-hover:rotate-12 transition-transform" />
+                  <span>Fueled by hot chai & curiosity</span>
+                </div>
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 tnum">
+                  {chaiCount} cups ☕
+                </span>
+              </div>
+
             </div>
           </div>
 

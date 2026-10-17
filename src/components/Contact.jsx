@@ -30,12 +30,10 @@ export const Contact = () => {
       <div className="section-container">
         
         {/* Title */}
-        <div className="flex flex-col items-start mb-12 sm:mb-16">
-          <div className="pulse-chip mb-4">
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white text-xs font-bold mr-2">
-              06
-            </span>
-            <span>Contact</span>
+        <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-semibold text-primary mb-4 shadow-sm">
+            <Mail className="w-3.5 h-3.5" />
+            <span>Open Inbox & Channels</span>
           </div>
           <h2 className="section-title text-foreground mb-4">
             Let's Connect
