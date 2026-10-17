@@ -9,9 +9,10 @@ import {
   Code2, 
   Coffee, 
   Flame, 
-  Sparkles 
+  Sparkles,
+  Zap
 } from 'lucide-react';
-import { Button } from './ui/Button';
+import { MagneticButton } from './ui/MagneticButton';
 
 export const Hero = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -28,148 +29,143 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative pt-24 pb-12 sm:pt-32 sm:pb-16 overflow-hidden">
+    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
       <div className="section-container">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Personal Human Story & Intro */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
+          {/* Left Column: 1minus1 Brutalist Headline & Story */}
+          <div className="lg:col-span-7 flex flex-col items-start space-y-7 text-left">
             
-            {/* Live Availability Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-medium text-foreground shadow-sm">
+            {/* 1minus1 Style Retro Pixel Status Badge */}
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1c0336] border border-[#c8ff00]/40 text-[#c8ff00] shadow-[0_0_15px_rgba(200,255,0,0.15)]">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c8ff00] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c8ff00]" />
               </span>
-              <span className="font-medium text-foreground">Available for Collaborations</span>
-              <span className="text-muted-foreground/60">•</span>
-              <span className="text-muted-foreground flex items-center gap-1">
-                <MapPin className="w-3 h-3 text-primary" />
-                Greater Noida, India
+              <span className="font-pixel text-[11px] tracking-widest uppercase">
+                SYSTEM ONLINE // GREATER NOIDA 🇮🇳
               </span>
             </div>
 
-            {/* Main Name & Headline */}
-            <div className="space-y-3">
-              <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-foreground tracking-tight leading-[1.1]">
-                Hey, I'm <span className="text-primary underline decoration-primary/30 decoration-wavy decoration-2">Utsab Mukharjee</span> 👋
+            {/* Main Name & 1minus1 Display Headline */}
+            <div className="space-y-4">
+              <h1 className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight leading-[0.95] uppercase">
+                ENGINEERING <br />
+                <span className="text-[#c8ff00] drop-shadow-[0_0_35px_rgba(200,255,0,0.4)]">
+                  THE REALM
+                </span> <br />
+                OF AI & SYSTEMS.
               </h1>
-              <p className="text-xl sm:text-2xl font-semibold text-foreground/90 leading-snug">
-                First-year AI student, low-level C explorer, and pragmatic builder.
+              <p className="text-xl sm:text-2xl font-bold text-[#d1b8ff] font-sans leading-snug">
+                Hey, I'm <span className="text-white underline decoration-[#c8ff00] decoration-4 underline-offset-4">Utsab Mukharjee</span> — First-year AI researcher, low-level C explorer, and builder.
               </p>
             </div>
 
             {/* Authentic Human Bio */}
-            <p className="text-muted-foreground text-base sm:text-lg leading-relaxed max-w-2xl">
-              I love taking complex systems apart to understand how they work under the hood. 
-              Whether that's diving into <strong className="text-foreground">pointer arithmetic in C</strong>, wiring up <strong className="text-foreground">Arduino gas sensors for IoT</strong>, crafting <strong className="text-foreground">3D hand-tracking air canvases</strong>, or stress-testing AI models—I learn best by breaking, building, and shipping open-source software.
+            <p className="text-[#b8a9cf] text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+              I deconstruct complex software to master its core mechanics. Whether digging into <strong className="text-white">pointer arithmetic in C</strong>, building <strong className="text-white">browser 3D hand-tracking air canvases</strong>, wiring <strong className="text-white">Arduino MQ-4 IoT sensors</strong>, or training neural networks—I build fast, surgical, and open-source software.
             </p>
 
             {/* Credential Tags */}
-            <div className="flex flex-wrap gap-2 pt-1">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
-                <GraduationCap className="w-3.5 h-3.5 text-primary" />
-                B.Tech AI @ ITS Engineering College (2026–2030)
+            <div className="flex flex-wrap gap-2.5 pt-1">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1c0336]/80 border border-[#360866] text-xs font-mono text-white/90">
+                <GraduationCap className="w-3.5 h-3.5 text-[#c8ff00]" />
+                B.Tech AI @ ITS Engineering (2026–2030)
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Ex-Intern @ Scaler School of Technology
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1c0336]/80 border border-[#360866] text-xs font-mono text-white/90">
+                <Zap className="w-3.5 h-3.5 text-[#9860ff]" />
+                Ex-Intern @ Scaler School of Tech
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-card border border-border/80 text-xs font-medium text-foreground shadow-sm">
-                <Code2 className="w-3.5 h-3.5 text-blue-500" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1c0336]/80 border border-[#360866] text-xs font-mono text-[#c8ff00]">
+                <Code2 className="w-3.5 h-3.5 text-[#c8ff00]" />
                 11 Open-Source Repositories
               </span>
             </div>
 
-            {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 pt-3 w-full sm:w-auto">
-              <a
+            {/* Magnetic 1minus1 Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-3 w-full sm:w-auto">
+              <MagneticButton
                 href="#projects"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all active:scale-[0.97]"
+                onClick={() => {
+                  const el = document.getElementById('projects');
+                  if (el && window.$lenis) window.$lenis.scrollTo(el, { offset: -80 });
+                }}
+                className="btn-1minus1 text-sm py-4 px-8"
               >
-                <span>See My Projects</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                <span>Explore Builds</span>
+                <ArrowRight className="w-4 h-4 text-[#140128]" />
+              </MagneticButton>
 
-              <Button
-                variant="outline"
-                size="default"
+              <MagneticButton
                 onClick={handleCopyEmail}
-                className="gap-2 px-5 py-3.5 h-auto text-sm border-border bg-card/80 hover:bg-accent text-foreground"
+                className="btn-1minus1-outline text-sm py-4 px-6"
               >
                 {copiedEmail ? (
                   <>
-                    <Check className="w-4 h-4 text-emerald-500" />
-                    <span>Email Copied!</span>
+                    <Check className="w-4 h-4 text-[#c8ff00]" />
+                    <span className="text-[#c8ff00]">Email Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-4 h-4 text-muted-foreground" />
+                    <Copy className="w-4 h-4 text-[#b8a9cf]" />
                     <span>speedrunner0007@gmail.com</span>
                   </>
                 )}
-              </Button>
-
-              <a
-                href="#contact"
-                className="px-4 py-3.5 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Get in touch →
-              </a>
+              </MagneticButton>
             </div>
 
           </div>
 
-          {/* Right Column: Authentic "Now & Workbench" Card */}
+          {/* Right Column: 1minus1 Workbench Terminal Card */}
           <div className="lg:col-span-5 flex justify-center w-full">
-            <div className="w-full max-w-md rounded-3xl glass-specular border border-border/80 p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between space-y-5">
+            <div className="w-full max-w-md rounded-3xl bg-[#190230]/90 border border-[#360866] p-7 shadow-[0_0_50px_rgba(0,0,0,0.6)] relative overflow-hidden flex flex-col justify-between space-y-6">
               
-              {/* Card Header with Terminal Controls */}
-              <div className="flex items-center justify-between pb-4 border-b border-border/60">
+              {/* Terminal Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-[#2a0453]">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="text-xs font-mono text-muted-foreground ml-2">
-                    utsab@developer-desk: ~
+                  <div className="w-3 h-3 rounded-full bg-[#ff3366]" />
+                  <div className="w-3 h-3 rounded-full bg-[#ffb800]" />
+                  <div className="w-3 h-3 rounded-full bg-[#c8ff00]" />
+                  <span className="text-xs font-mono text-[#b8a9cf] ml-2">
+                    utsab@1minus1-node: ~
                   </span>
                 </div>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-primary/10 text-primary font-semibold">
-                  bash
+                <span className="text-[10px] font-pixel px-2.5 py-1 rounded bg-[#c8ff00]/10 text-[#c8ff00] border border-[#c8ff00]/30 font-bold uppercase">
+                  ACTIVE
                 </span>
               </div>
 
-              {/* Terminal Snippet */}
-              <div className="font-mono text-xs space-y-2.5 bg-muted/40 p-4 rounded-2xl border border-border/50 text-left">
-                <div className="text-muted-foreground">
-                  <span className="text-primary font-bold">$</span> cat ~/.currently_building
+              {/* Terminal Snippet in 1minus1 Cyberpunk styling */}
+              <div className="font-mono text-xs space-y-3 bg-[#140128]/90 p-5 rounded-2xl border border-[#26024a] text-left">
+                <div className="text-[#9860ff]">
+                  <span className="text-[#c8ff00] font-bold">❯</span> cat ~/.currently_building
                 </div>
-                <div className="text-foreground pl-3 border-l-2 border-primary/50 space-y-1">
-                  <div>• <span className="font-semibold text-foreground">AirCanvas:</span> 3D gesture tracking in browser</div>
-                  <div>• <span className="font-semibold text-foreground">C Systems:</span> Memory allocators & pointers</div>
-                  <div>• <span className="font-semibold text-foreground">IoT Sentinel:</span> Arduino MQ-4 gas telemetry</div>
+                <div className="text-white pl-3 border-l-2 border-[#c8ff00] space-y-1.5 text-[12px]">
+                  <div>• <span className="font-bold text-[#c8ff00]">AirCanvas:</span> 3D gesture drawing in browser</div>
+                  <div>• <span className="font-bold text-[#c8ff00]">C Systems:</span> Memory allocators & pointers</div>
+                  <div>• <span className="font-bold text-[#c8ff00]">IoT Sentinel:</span> Arduino MQ-4 gas telemetry</div>
                 </div>
-                <div className="text-muted-foreground pt-1">
-                  <span className="text-primary font-bold">$</span> echo $ENGINEERING_RULE
+                <div className="text-[#9860ff] pt-2">
+                  <span className="text-[#c8ff00] font-bold">❯</span> echo $ENGINEERING_RULE
                 </div>
-                <div className="text-primary font-semibold pl-3 border-l-2 border-primary/50 text-[11px]">
+                <div className="text-[#c8ff00] font-bold pl-3 border-l-2 border-[#9860ff] text-[12px]">
                   "Zero speculative bloat. Build to understand."
                 </div>
               </div>
 
-              {/* Personal Human Badges */}
-              <div className="grid grid-cols-2 gap-2.5 pt-1">
-                <div className="p-3 rounded-xl bg-card/60 border border-border/60 text-left">
-                  <div className="text-[11px] text-muted-foreground font-medium">Focus Area</div>
-                  <div className="text-xs font-bold text-foreground mt-0.5">AI/ML & Systems</div>
+              {/* Personal System Badges */}
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div className="p-3.5 rounded-2xl bg-[#1c0336] border border-[#2a0453] text-left">
+                  <div className="text-[11px] text-[#b8a9cf] font-pixel uppercase">Focus Area</div>
+                  <div className="text-xs font-bold text-white mt-1">AI/ML & Systems</div>
                 </div>
-                <div className="p-3 rounded-xl bg-card/60 border border-border/60 text-left">
-                  <div className="text-[11px] text-muted-foreground font-medium">GitHub</div>
+                <div className="p-3.5 rounded-2xl bg-[#1c0336] border border-[#2a0453] text-left">
+                  <div className="text-[11px] text-[#b8a9cf] font-pixel uppercase">GitHub Repo</div>
                   <a 
                     href="https://github.com/Unknown-fig" 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="text-xs font-bold text-primary hover:underline mt-0.5 block truncate"
+                    className="text-xs font-bold text-[#c8ff00] hover:underline mt-1 block truncate"
                   >
                     @Unknown-fig ↗
                   </a>
@@ -179,14 +175,14 @@ export const Hero = () => {
               {/* Interactive Chai Easter Egg */}
               <div 
                 onClick={handleChaiClick}
-                className="flex items-center justify-between p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 cursor-pointer hover:bg-amber-500/15 transition-all select-none group"
+                className="flex items-center justify-between p-3.5 rounded-2xl bg-[#26024a]/60 border border-[#9860ff]/30 cursor-pointer hover:border-[#c8ff00]/60 hover:bg-[#26024a] transition-all select-none group"
                 title="Click to add another cup of chai to the counter!"
               >
-                <div className="flex items-center gap-2.5 text-xs text-amber-700 dark:text-amber-300 font-medium">
-                  <Coffee className="w-4 h-4 text-amber-500 group-hover:rotate-12 transition-transform" />
+                <div className="flex items-center gap-2.5 text-xs text-[#d1b8ff] font-medium">
+                  <Coffee className="w-4 h-4 text-[#c8ff00] group-hover:rotate-12 transition-transform" />
                   <span>Fueled by hot chai & curiosity</span>
                 </div>
-                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-600 dark:text-amber-400 tnum">
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-[#c8ff00] text-[#140128] font-black tnum shadow-[0_0_10px_rgba(200,255,0,0.3)]">
                   {chaiCount} cups ☕
                 </span>
               </div>

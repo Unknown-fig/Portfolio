@@ -34,19 +34,19 @@ export const LiveAnalytics = () => {
   return (
     <div
       onClick={handleClick}
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-specular border border-border/60 shadow-sm cursor-pointer transition-all duration-150 active:scale-95 select-none hover:border-primary/50"
+      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1c0336] border border-[#360866] shadow-sm cursor-pointer transition-all duration-200 active:scale-95 select-none hover:border-[#c8ff00]/60"
       title="Click to bump visitor counter"
     >
       <span className="relative flex h-2.5 w-2.5">
-        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c8ff00] opacity-75" />
+        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#c8ff00]" />
       </span>
-      <Users className="w-4 h-4 text-muted-foreground" />
-      <span className="text-xs uppercase font-bold tracking-wider text-muted-foreground">
-        Live Stats:
+      <Users className="w-3.5 h-3.5 text-[#9860ff]" />
+      <span className="text-[10px] font-pixel uppercase tracking-wider text-[#9860ff]">
+        SYSTEM PULSE:
       </span>
-      <span className={`text-sm font-bold font-mono tnum transition-transform duration-200 ${clicked ? 'scale-125 text-primary' : 'text-foreground'}`}>
-        {visitorCount.toLocaleString()} visitors
+      <span className={`text-xs font-mono font-bold tnum transition-transform duration-200 ${clicked ? 'scale-125 text-[#c8ff00]' : 'text-white'}`}>
+        {visitorCount.toLocaleString()} EXPLORERS
       </span>
     </div>
   );

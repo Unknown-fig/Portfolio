@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Hero } from '../components/Hero';
-import { ParallaxBackground } from '../components/ParallaxBackground';
+import { AtmosphericBackground } from '../components/AtmosphericBackground';
 import { GeolocationGreeting } from '../components/GeolocationGreeting';
 import { LiveAnalytics } from '../components/LiveAnalytics';
 import { About } from '../components/About';
@@ -14,24 +14,28 @@ import { Footer } from '../components/Footer';
 
 export const Index = () => {
   useEffect(() => {
-    // Scroll listener for hash anchors
+    // Scroll listener for hash anchors with Lenis support
     if (window.location.hash) {
       const id = window.location.hash.substring(1);
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-          const offset = window.innerWidth < 768 ? 80 : 70;
-          window.scrollTo({
-            top: el.offsetTop - offset,
-            behavior: 'smooth',
-          });
+          if (window.$lenis) {
+            window.$lenis.scrollTo(el, { offset: -80 });
+          } else {
+            const offset = window.innerWidth < 768 ? 80 : 70;
+            window.scrollTo({
+              top: el.offsetTop - offset,
+              behavior: 'smooth',
+            });
+          }
         }
       }, 100);
     }
   }, []);
 
   return (
-    <ParallaxBackground className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <AtmosphericBackground className="min-h-screen bg-[#140128] text-white">
       <Navbar />
 
       <main className="space-y-4 sm:space-y-8">
@@ -52,6 +56,6 @@ export const Index = () => {
       </main>
 
       <Footer />
-    </ParallaxBackground>
+    </AtmosphericBackground>
   );
 };

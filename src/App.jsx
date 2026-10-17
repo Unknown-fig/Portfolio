@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'sonner';
+import { useLenis } from './hooks/useLenis';
+import { CustomCursor } from './components/CustomCursor';
 
 import { Index } from './pages/Index';
 import { Blog } from './pages/Blog';
@@ -10,8 +12,12 @@ import { Certificates } from './pages/Certificates';
 import { TestimonialsPage } from './pages/TestimonialsPage';
 
 export function App() {
+  // Activate 1minus1 Lenis Inertia Scroll Physics
+  useLenis();
+
   return (
     <ThemeProvider>
+      <CustomCursor />
       <Router>
         <Routes>
           <Route path="/" element={<Index />} />

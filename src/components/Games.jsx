@@ -45,46 +45,49 @@ export const TicTacToe = () => {
   const isDraw = !winner && board.every((cell) => cell !== null);
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-xl border-border/80">
-      <CardHeader className="text-center pb-4">
-        <CardTitle className="text-2xl font-bold font-display text-foreground">
-          Tic Tac Toe
-        </CardTitle>
-        <div className="text-base font-medium mt-1">
+    <div className="w-full max-w-md mx-auto shadow-[0_0_50px_rgba(0,0,0,0.6)] border border-[#360866] bg-[#190230]/90 rounded-3xl p-7 text-center">
+      <div className="text-center pb-5 border-b border-[#2a0453]">
+        <h3 className="text-2xl font-black font-display text-white uppercase tracking-tight">
+          TIC TAC TOE
+        </h3>
+        <div className="text-xs font-pixel mt-2 uppercase">
           {winner ? (
-            <span className="text-emerald-500 font-bold">Winner: Player {winner}! 🎉</span>
+            <span className="text-[#c8ff00] font-bold">WINNER: PLAYER {winner}! 🏆</span>
           ) : isDraw ? (
-            <span className="text-amber-500 font-bold">It's a draw! 🤝</span>
+            <span className="text-[#ffb800] font-bold">STALEMATE // DRAW 🤝</span>
           ) : (
-            <span className="text-muted-foreground">Next turn: <strong className="text-primary">{isXNext ? 'X' : 'O'}</strong></span>
+            <span className="text-[#b8a9cf]">TURN: <strong className="text-[#c8ff00]">{isXNext ? 'X' : 'O'}</strong></span>
           )}
         </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="grid grid-cols-3 gap-2.5 max-w-[260px] mx-auto">
+      </div>
+      <div className="space-y-6 pt-6">
+        <div className="grid grid-cols-3 gap-3 max-w-[270px] mx-auto">
           {board.map((cell, idx) => (
             <button
               key={idx}
               onClick={() => handleClick(idx)}
               disabled={!!cell || !!winner}
-              className={`w-20 h-20 text-3xl font-bold font-mono rounded-xl border-2 transition-all duration-200 flex items-center justify-center ${
+              className={`w-20 h-20 text-3xl font-black font-pixel rounded-2xl border-2 transition-all duration-200 flex items-center justify-center ${
                 cell === 'X'
-                  ? 'border-blue-500 text-blue-500 bg-blue-500/10'
+                  ? 'border-[#c8ff00] text-[#c8ff00] bg-[#c8ff00]/10 shadow-[0_0_15px_rgba(200,255,0,0.2)]'
                   : cell === 'O'
-                  ? 'border-orange-500 text-orange-500 bg-orange-500/10'
-                  : 'border-border bg-card hover:bg-accent hover:border-primary/50'
+                  ? 'border-[#9860ff] text-[#9860ff] bg-[#9860ff]/10 shadow-[0_0_15px_rgba(152,96,255,0.2)]'
+                  : 'border-[#360866] bg-[#140128] hover:border-[#c8ff00]/60'
               }`}
             >
               {cell}
             </button>
           ))}
         </div>
-        <Button onClick={handleReset} variant="outline" className="w-full">
+        <button 
+          onClick={handleReset} 
+          className="w-full btn-1minus1-outline text-xs py-3 justify-center"
+        >
           <RotateCcw className="w-4 h-4 mr-2" />
-          Reset Game
-        </Button>
-      </CardContent>
-    </Card>
+          <span>Reset Grid</span>
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -110,16 +113,16 @@ export const SnakeAndLadder = () => {
     let nextPos = currentPos + rolled;
 
     if (nextPos > 100) {
-      nextPos = currentPos; // Must land exactly on 100
+      nextPos = currentPos;
     }
 
     if (snakes[nextPos]) {
       const drop = snakes[nextPos];
-      setLogs((prev) => [`Player ${currentPlayer} bit by a Snake! ${nextPos} ➔ ${drop}`, ...prev.slice(0, 4)]);
+      setLogs((prev) => [`Player ${currentPlayer} bit by a Snake! ${nextPos} ➔ ${drop} 🐍`, ...prev.slice(0, 4)]);
       nextPos = drop;
     } else if (ladders[nextPos]) {
       const climb = ladders[nextPos];
-      setLogs((prev) => [`Player ${currentPlayer} climbed a Ladder! ${nextPos} ➔ ${climb} 🚀`, ...prev.slice(0, 4)]);
+      setLogs((prev) => [`Player ${currentPlayer} climbed a Ladder! ${nextPos} ➔ ${climb} 🪜`, ...prev.slice(0, 4)]);
       nextPos = climb;
     } else {
       setLogs((prev) => [`Player ${currentPlayer} rolled ${rolled} ➔ tile ${nextPos}`, ...prev.slice(0, 4)]);
@@ -133,7 +136,7 @@ export const SnakeAndLadder = () => {
 
     if (nextPos === 100) {
       setWinner(currentPlayer);
-      setLogs((prev) => [`🎉 Player ${currentPlayer} wins the game!`, ...prev]);
+      setLogs((prev) => [`🏆 Player ${currentPlayer} claimed victory!`, ...prev]);
     } else {
       setCurrentPlayer(currentPlayer === 1 ? 2 : 1);
     }
@@ -149,61 +152,55 @@ export const SnakeAndLadder = () => {
   };
 
   const getTileClass = (num) => {
-    if (num === p1 && num === p2 && num > 0) return 'bg-purple-600 text-white font-bold ring-2 ring-purple-300';
-    if (num === p1 && num > 0) return 'bg-blue-600 text-white font-bold ring-2 ring-blue-300';
-    if (num === p2 && num > 0) return 'bg-red-600 text-white font-bold ring-2 ring-red-300';
-    if (snakes[num]) return 'bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-400 font-semibold';
-    if (ladders[num]) return 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 font-semibold';
-    return 'bg-card text-foreground hover:bg-accent/40';
+    if (num === p1 && num === p2 && num > 0) return 'bg-[#c8ff00] text-[#140128] font-black border-[#c8ff00] ring-2 ring-[#c8ff00]';
+    if (num === p1 && num > 0) return 'bg-[#c8ff00] text-[#140128] font-black border-[#c8ff00] shadow-[0_0_10px_rgba(200,255,0,0.4)]';
+    if (num === p2 && num > 0) return 'bg-[#9860ff] text-white font-black border-[#9860ff] shadow-[0_0_10px_rgba(152,96,255,0.4)]';
+    if (snakes[num]) return 'bg-[#ff3366]/20 text-[#ff3366] border-[#ff3366]/40 font-bold';
+    if (ladders[num]) return 'bg-[#c8ff00]/15 text-[#c8ff00] border-[#c8ff00]/40 font-bold';
+    return 'bg-[#140128] text-[#b8a9cf] border-[#26024a]';
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-xl border-border/80">
-      <CardHeader className="text-center pb-4">
-        <CardTitle className="text-2xl font-bold font-display text-foreground">
-          Snake & Ladder
-        </CardTitle>
-        <div className="text-base font-medium mt-1">
-          {winner ? (
-            <span className="text-emerald-500 font-bold">Player {winner} Wins! 🏆</span>
-          ) : (
-            <span className="text-muted-foreground">
-              Current Turn: <strong className={currentPlayer === 1 ? 'text-blue-500 font-bold' : 'text-red-500 font-bold'}>Player {currentPlayer}</strong>
-            </span>
-          )}
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        
+    <div className="w-full max-w-2xl mx-auto shadow-[0_0_50px_rgba(0,0,0,0.6)] border border-[#360866] bg-[#190230]/90 rounded-3xl p-7 text-center">
+      <div className="text-center pb-5 border-b border-[#2a0453]">
+        <h3 className="text-2xl font-black font-display text-white uppercase tracking-tight">
+          SNAKE & LADDER // CYBER ARENA
+        </h3>
+        <p className="text-xs font-mono text-[#b8a9cf] mt-1">
+          First player to tile 100 wins. Watch out for red snakes!
+        </p>
+      </div>
+
+      <div className="space-y-6 pt-6">
         {/* Controls and Scoreboard */}
-        <div className="flex flex-col sm:flex-row gap-6 items-center justify-between p-4 rounded-2xl bg-muted/30 border border-border">
+        <div className="flex flex-col sm:flex-row gap-6 items-center justify-between p-4 rounded-2xl bg-[#140128] border border-[#26024a]">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-blue-500" />
-              <span className="text-sm font-semibold">Player 1: <strong className="font-mono text-primary">{p1}/100</strong></span>
+              <span className="w-3.5 h-3.5 rounded-full bg-[#c8ff00]" />
+              <span className="text-xs font-mono font-bold text-white">Player 1: <strong className="text-[#c8ff00]">{p1}/100</strong></span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3.5 h-3.5 rounded-full bg-red-500" />
-              <span className="text-sm font-semibold">Player 2: <strong className="font-mono text-primary">{p2}/100</strong></span>
+              <span className="w-3.5 h-3.5 rounded-full bg-[#9860ff]" />
+              <span className="text-xs font-mono font-bold text-white">Player 2: <strong className="text-[#9860ff]">{p2}/100</strong></span>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 bg-card px-3 py-1.5 rounded-xl border border-border">
-              <span className="text-xs font-semibold text-muted-foreground uppercase">Dice:</span>
-              <DiceComponent className="w-7 h-7 text-primary animate-pulse" />
+            <div className="flex items-center gap-2 bg-[#1c0336] px-3 py-1.5 rounded-xl border border-[#360866]">
+              <span className="text-[10px] font-pixel text-[#9860ff] uppercase">Dice:</span>
+              <DiceComponent className="w-6 h-6 text-[#c8ff00]" />
             </div>
-            <Button onClick={handleRoll} disabled={!!winner} className="px-6 shadow-md">
+            <button onClick={handleRoll} disabled={!!winner} className="btn-1minus1 text-xs py-2 px-5">
               Roll Dice
-            </Button>
-            <Button onClick={handleReset} variant="outline" size="icon" aria-label="Reset game">
+            </button>
+            <button onClick={handleReset} className="p-2.5 rounded-xl border border-[#360866] bg-[#1c0336] hover:border-[#c8ff00] text-white" aria-label="Reset game">
               <RotateCcw className="w-4 h-4" />
-            </Button>
+            </button>
           </div>
         </div>
 
-        {/* 10x10 Game Board (Boustrophedon Grid) */}
-        <div className="grid grid-cols-10 gap-1 sm:gap-1.5 max-w-xl mx-auto p-2 bg-muted/20 border border-border rounded-2xl shadow-inner">
+        {/* 10x10 Game Board */}
+        <div className="grid grid-cols-10 gap-1 sm:gap-1.5 max-w-xl mx-auto p-3 bg-[#140128] border border-[#26024a] rounded-2xl shadow-inner">
           {Array.from({ length: 100 }, (_, i) => {
             const row = Math.floor(i / 10);
             const col = i % 10;
@@ -213,7 +210,7 @@ export const SnakeAndLadder = () => {
             return (
               <div
                 key={i}
-                className={`w-7 h-7 sm:w-11 sm:h-11 rounded-md sm:rounded-lg border border-border/60 flex items-center justify-center text-[10px] sm:text-xs font-mono transition-colors duration-200 ${getTileClass(tileNumber)}`}
+                className={`w-7 h-7 sm:w-11 sm:h-11 rounded-md sm:rounded-lg border flex items-center justify-center text-[10px] sm:text-xs font-mono transition-colors duration-200 ${getTileClass(tileNumber)}`}
                 title={`Tile ${tileNumber}${snakes[tileNumber] ? ` (Snake to ${snakes[tileNumber]})` : ''}${ladders[tileNumber] ? ` (Ladder to ${ladders[tileNumber]})` : ''}`}
               >
                 {tileNumber}
@@ -224,17 +221,18 @@ export const SnakeAndLadder = () => {
 
         {/* Game Activity Logs */}
         {logs.length > 0 && (
-          <div className="bg-muted/30 rounded-xl p-3 border border-border/60 text-xs font-mono space-y-1 max-w-xl mx-auto">
+          <div className="bg-[#140128] rounded-2xl p-4 border border-[#26024a] text-xs font-mono space-y-1.5 max-w-xl mx-auto text-left">
             {logs.map((log, idx) => (
-              <div key={idx} className="text-muted-foreground truncate">
+              <div key={idx} className="text-[#b8a9cf] truncate">
+                <span className="text-[#c8ff00] mr-2">❯</span>
                 {log}
               </div>
             ))}
           </div>
         )}
 
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 
@@ -242,40 +240,40 @@ export const Games = () => {
   const [activeTab, setActiveTab] = useState('tictactoe');
 
   return (
-    <section id="games" className="py-16 sm:py-24 relative">
+    <section id="games" className="py-20 sm:py-28 relative">
       <div className="section-container">
         
         {/* Title */}
-        <div className="flex flex-col items-start mb-10 sm:mb-14">
-          <div className="pulse-chip mb-4">
-            <Gamepad2 className="w-4 h-4 mr-2" />
-            <span>Interactive Arcade</span>
+        <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1c0336] border border-[#c8ff00]/40 text-[#c8ff00] text-xs font-pixel mb-5 uppercase tracking-wider shadow-[0_0_15px_rgba(200,255,0,0.15)]">
+            <Gamepad2 className="w-4 h-4 mr-1 text-[#c8ff00]" />
+            <span>ARCADE VAULT // PLAYABLE BUILDS</span>
           </div>
-          <h2 className="section-title text-foreground mb-4">
-            Playable Mini-Games
+          <h2 className="section-title text-white mb-4 uppercase">
+            PLAYABLE <span className="text-[#c8ff00]">ARCADE</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl text-left">
-            Built from scratch to demonstrate React state synchronization, algorithms, and responsive UI components.
+          <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
+            Built from scratch to demonstrate React state synchronization, algorithmic movement, and responsive UI components.
           </p>
 
           {/* Game Switcher Tabs */}
-          <div className="inline-flex p-1 bg-muted rounded-xl mt-6 border border-border">
+          <div className="inline-flex p-1.5 bg-[#1c0336] rounded-full mt-6 border border-[#360866]">
             <button
               onClick={() => setActiveTab('tictactoe')}
-              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'tictactoe'
-                  ? 'bg-card text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'bg-[#c8ff00] text-[#140128] shadow-[0_0_15px_rgba(200,255,0,0.3)] font-black'
+                  : 'text-[#b8a9cf] hover:text-white'
               }`}
             >
               Tic Tac Toe
             </button>
             <button
               onClick={() => setActiveTab('snakeandladder')}
-              className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+              className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
                 activeTab === 'snakeandladder'
-                  ? 'bg-card text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'bg-[#c8ff00] text-[#140128] shadow-[0_0_15px_rgba(200,255,0,0.3)] font-black'
+                  : 'text-[#b8a9cf] hover:text-white'
               }`}
             >
               Snake & Ladder

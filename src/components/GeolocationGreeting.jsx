@@ -12,9 +12,9 @@ export const GeolocationGreeting = () => {
         const res = await fetch('https://ipapi.co/json/');
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
-        if (isMounted) setCity(data.city || 'somewhere amazing');
+        if (isMounted) setCity(data.city || 'Planet Earth');
       } catch {
-        if (isMounted) setCity('somewhere amazing');
+        if (isMounted) setCity('Planet Earth');
       } finally {
         if (isMounted) setLoading(false);
       }
@@ -24,18 +24,18 @@ export const GeolocationGreeting = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-2 text-muted-foreground animate-pulse text-sm">
-        <MapPin className="w-4 h-4 text-primary" />
-        <span>Locating visitor...</span>
+      <div className="flex items-center gap-2 text-[#b8a9cf] animate-pulse text-xs font-pixel uppercase">
+        <MapPin className="w-3.5 h-3.5 text-[#c8ff00]" />
+        <span>PINGING TELEMETRY...</span>
       </div>
     );
   }
 
   return (
-    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-specular border border-border/60 text-foreground text-sm shadow-sm animate-fade-in">
-      <MapPin className="w-4 h-4 text-primary animate-bounce" />
+    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1c0336] border border-[#360866] text-white text-xs font-mono shadow-sm">
+      <MapPin className="w-3.5 h-3.5 text-[#c8ff00] animate-bounce" />
       <span>
-        Hello from <strong className="text-primary font-semibold">{city}</strong>—thanks for visiting!
+        TELEMETRY FROM <strong className="text-[#c8ff00] font-bold uppercase">{city}</strong> — WELCOME TO THE REALM
       </span>
     </div>
   );

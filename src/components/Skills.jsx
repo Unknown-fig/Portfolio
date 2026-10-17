@@ -10,13 +10,12 @@ import {
   Compass, 
   ShieldCheck 
 } from 'lucide-react';
-import { Card, CardContent } from './ui/Card';
 
 export const Skills = () => {
   const [activeTab, setActiveTab] = useState('all');
 
   const categories = [
-    { id: 'all', label: 'All Technologies' },
+    { id: 'all', label: 'All Stack' },
     { id: 'languages', label: 'Languages & Systems' },
     { id: 'web', label: 'Web & 3D Graphics' },
     { id: 'hardware', label: 'Hardware & IoT' },
@@ -26,74 +25,74 @@ export const Skills = () => {
     {
       name: "C Language & Memory",
       category: "languages",
-      highlight: "Pointers & Primitives",
+      highlight: "Pointers & Memory Layout",
       note: "Manual memory allocation, struct alignment, pointers, and understanding how hardware executes code without runtime overhead.",
-      tag: "Systems",
-      color: "border-blue-500/30 bg-blue-500/5 text-blue-500",
+      tag: "SYSTEMS",
+      color: "border-[#9860ff]/40 bg-[#9860ff]/10 text-[#c8ff00]",
     },
     {
       name: "Python for ML & Scraping",
       category: "languages",
-      highlight: "Rapid Prototyping",
-      note: "Data manipulation with Pandas, FastAPI backends, asynchronous Playwright web scrapers, and machine learning fundamentals.",
-      tag: "Data & ML",
-      color: "border-amber-500/30 bg-amber-500/5 text-amber-500",
+      highlight: "Rapid Architecture",
+      note: "Data manipulation with Pandas, FastAPI backends, asynchronous Playwright web scrapers, and neural network fundamentals.",
+      tag: "DATA & ML",
+      color: "border-[#c8ff00]/40 bg-[#c8ff00]/10 text-[#c8ff00]",
     },
     {
       name: "JavaScript & TypeScript",
       category: "languages",
-      highlight: "Modern Web",
-      note: "React state management, Next.js App Router, asynchronous promises, and type-safe component design.",
-      tag: "Full Stack",
-      color: "border-yellow-500/30 bg-yellow-500/5 text-yellow-500",
+      highlight: "Full-Stack Web",
+      note: "React state management, Next.js App Router, asynchronous concurrency, and type-safe component design.",
+      tag: "FULL STACK",
+      color: "border-[#9860ff]/40 bg-[#9860ff]/10 text-[#9860ff]",
     },
     {
       name: "Three.js & WebGL",
       category: "web",
       highlight: "3D Spatial Graphics",
       note: "Rendering 3D ribbon strokes, camera matrices, perspective views, and interactive WebGL canvas scenes in AirCanvas.",
-      tag: "Creative Tech",
-      color: "border-purple-500/30 bg-purple-500/5 text-purple-500",
+      tag: "CREATIVE 3D",
+      color: "border-[#c8ff00]/40 bg-[#c8ff00]/10 text-[#c8ff00]",
     },
     {
-      name: "MediaPipe Computer Vision",
+      name: "MediaPipe Vision AI",
       category: "web",
       highlight: "Hand Landmarking",
       note: "Real-time webcam hand tracking, multi-point landmark detection, and calibrating pinch gesture triggers with sub-15ms latency.",
-      tag: "Vision AI",
-      color: "border-cyan-500/30 bg-cyan-500/5 text-cyan-500",
+      tag: "VISION AI",
+      color: "border-[#9860ff]/40 bg-[#9860ff]/10 text-[#9860ff]",
     },
     {
-      name: "React 18, Vite & Tailwind",
+      name: "React 18 & Tailwind",
       category: "web",
       highlight: "High-Speed SPAs",
       note: "Building responsive, accessible web interfaces with glassmorphism, spring physics animations, and modular components.",
-      tag: "UI Architecture",
-      color: "border-emerald-500/30 bg-emerald-500/5 text-emerald-500",
+      tag: "UI ARCHITECTURE",
+      color: "border-[#c8ff00]/40 bg-[#c8ff00]/10 text-[#c8ff00]",
     },
     {
-      name: "Arduino & Microcontrollers",
+      name: "Arduino Microcontrollers",
       category: "hardware",
       highlight: "Firmware Loops",
       note: "Writing embedded C/C++ firmware, polling analog gas sensor voltages, and serial communication to host machines.",
-      tag: "Embedded",
-      color: "border-teal-500/30 bg-teal-500/5 text-teal-500",
+      tag: "EMBEDDED",
+      color: "border-[#9860ff]/40 bg-[#9860ff]/10 text-[#9860ff]",
     },
     {
-      name: "MQ-4 / MQ-2 Gas Sensors",
+      name: "MQ-4 / MQ-2 Sensors",
       category: "hardware",
-      highlight: "Sensor Transducers",
+      highlight: "Gas Transducers",
       note: "Calibrating baseline resistance, PPM calculation for hazardous methane/LPG detection, and hardware trigger logic.",
-      tag: "IoT Hardware",
-      color: "border-rose-500/30 bg-rose-500/5 text-rose-500",
+      tag: "IOT HARDWARE",
+      color: "border-[#c8ff00]/40 bg-[#c8ff00]/10 text-[#c8ff00]",
     },
     {
       name: "MQTT & WebSockets",
       category: "hardware",
       highlight: "Real-Time Telemetry",
       note: "Streaming low-latency sensor telemetry from Python hardware bridges to live browser dashboards.",
-      tag: "Protocols",
-      color: "border-indigo-500/30 bg-indigo-500/5 text-indigo-500",
+      tag: "PROTOCOLS",
+      color: "border-[#9860ff]/40 bg-[#9860ff]/10 text-[#c8ff00]",
     },
   ];
 
@@ -120,32 +119,32 @@ export const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-16 sm:py-24 relative">
+    <section id="skills" className="py-20 sm:py-28 relative">
       <div className="section-container">
         
         {/* Section Header */}
-        <div className="flex flex-col items-start mb-10 sm:mb-14 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-semibold text-primary mb-4 shadow-sm">
+        <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1c0336] border border-[#c8ff00]/40 text-[#c8ff00] text-xs font-pixel mb-5 uppercase tracking-wider shadow-[0_0_15px_rgba(200,255,0,0.15)]">
             <Code2 className="w-3.5 h-3.5" />
-            <span>Developer Toolbox & Tech Stack</span>
+            <span>DEVELOPER TOOLBOX // WEAPONS OF CHOICE</span>
           </div>
-          <h2 className="section-title text-foreground mb-4">
-            Technologies I Actually Build With
+          <h2 className="section-title text-white mb-4 uppercase">
+            TECHNOLOGIES I <span className="text-[#c8ff00]">COMMAND</span>
           </h2>
-          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl">
+          <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl font-normal">
             No arbitrary percentage bars. Here is the actual toolkit I use to write low-level systems, build full-stack web applications, wire up IoT microcontrollers, and experiment with computer vision.
           </p>
 
           {/* Category Filter Tabs */}
-          <div className="flex flex-wrap gap-2 mt-6">
+          <div className="flex flex-wrap gap-2.5 mt-8">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 spring-press select-none border ${
+                className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 select-none border ${
                   activeTab === cat.id
-                    ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20 scale-[1.02]"
-                    : "glass-specular text-muted-foreground border-border/80 hover:text-foreground hover:border-primary/40"
+                    ? "bg-[#c8ff00] text-[#140128] border-[#c8ff00] shadow-[0_0_20px_rgba(200,255,0,0.3)] scale-[1.02]"
+                    : "bg-[#1c0336]/80 text-[#b8a9cf] border-[#360866] hover:text-white hover:border-[#9860ff]/60"
                 }`}
               >
                 {cat.label}
@@ -155,51 +154,51 @@ export const Skills = () => {
         </div>
 
         {/* Tools Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20 text-left">
           {filteredTools.map((tool) => (
-            <Card 
+            <div 
               key={tool.name} 
-              className="glass-specular p-5 border-border/60 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1 rounded-2xl transition-all duration-200 flex flex-col justify-between"
+              className="bg-[#190230]/80 p-6 border border-[#360866] hover:border-[#c8ff00]/60 hover:shadow-[0_0_35px_rgba(200,255,0,0.12)] rounded-3xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <h3 className="font-bold text-foreground text-base">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <h3 className="font-display font-bold text-white text-lg group-hover:text-[#c8ff00] transition-colors">
                     {tool.name}
                   </h3>
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md border font-semibold ${tool.color}`}>
+                  <span className={`text-[10px] font-pixel px-2.5 py-1 rounded-full border font-bold uppercase ${tool.color}`}>
                     {tool.tag}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-primary mb-2">
+                <div className="text-xs font-mono font-bold text-[#c8ff00] mb-2 uppercase tracking-wide">
                   {tool.highlight}
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed">
+                <p className="text-xs text-[#b8a9cf] leading-relaxed">
                   {tool.note}
                 </p>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
         {/* Engineering Philosophy Ribbon */}
-        <div className="p-6 sm:p-8 rounded-3xl glass-specular border border-border/70 shadow-lg text-left">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary mb-4">
+        <div className="p-8 sm:p-10 rounded-3xl bg-[#190230]/90 border border-[#360866] shadow-[0_0_50px_rgba(0,0,0,0.5)] text-left">
+          <div className="flex items-center gap-2.5 text-xs font-pixel font-bold uppercase tracking-wider text-[#c8ff00] mb-6">
             <Compass className="w-4 h-4" />
-            <span>Engineering Principles I Build By</span>
+            <span>ENGINEERING PRINCIPLES I BUILD BY</span>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {engineeringPrinciples.map((principle, idx) => {
               const Icon = principle.icon;
               return (
-                <div key={idx} className="space-y-2">
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-3">
-                    <Icon className="w-5 h-5" />
+                <div key={idx} className="space-y-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#c8ff00]/10 text-[#c8ff00] flex items-center justify-center border border-[#c8ff00]/20 mb-4">
+                    <Icon className="w-6 h-6" />
                   </div>
-                  <h4 className="font-bold text-foreground text-base">
+                  <h4 className="font-display font-black text-white text-xl uppercase tracking-tight">
                     {principle.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#b8a9cf] leading-relaxed font-normal">
                     {principle.description}
                   </p>
                 </div>

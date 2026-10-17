@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
-import { Sun, Moon, Menu, X } from 'lucide-react';
-import { Button } from './ui/Button';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { MagneticButton } from './ui/MagneticButton';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", href: "/" },
     { name: "About", href: "/#about" },
     { name: "Skills", href: "/#skills" },
     { name: "Projects", href: "/#projects" },
     { name: "Timeline", href: "/#timeline" },
-    { name: "Blog", href: "/blog" },
     { name: "Certificates", href: "/certificates" },
-    { name: "Testimonials", href: "/testimonials" },
     { name: "Games", href: "/#games" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Blog", href: "/blog" },
+    { name: "Testimonials", href: "/testimonials" },
   ];
 
   const handleScrollClick = (href) => {
@@ -27,46 +23,54 @@ export const Navbar = () => {
     if (href.startsWith('/#')) {
       const id = href.substring(2);
       if (location.pathname !== '/') {
-        // Handled by router navigation
         return;
       }
       const el = document.getElementById(id);
       if (el) {
-        const offset = window.innerWidth < 768 ? 80 : 70;
-        window.scrollTo({
-          top: el.offsetTop - offset,
-          behavior: 'smooth',
-        });
+        if (window.$lenis) {
+          window.$lenis.scrollTo(el, { offset: -80 });
+        } else {
+          const offset = window.innerWidth < 768 ? 80 : 70;
+          window.scrollTo({
+            top: el.offsetTop - offset,
+            behavior: 'smooth',
+          });
+        }
       }
     }
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-specular border-b border-border/50 transition-colors duration-200 pt-[env(safe-area-inset-top)]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#140128]/85 backdrop-blur-2xl border-b border-[#26024a] transition-all duration-300 pt-[env(safe-area-inset-top)]">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Brand */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-primary text-primary-foreground rounded-lg flex items-center justify-center font-bold text-sm shadow-sm transition-transform duration-200 group-hover:scale-105">
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="w-10 h-10 bg-[#c8ff00] text-[#140128] rounded-xl flex items-center justify-center font-black font-display text-base tracking-tighter shadow-[0_0_20px_rgba(200,255,0,0.3)] transition-transform duration-200 group-hover:scale-105 group-hover:rotate-3">
               UM
             </div>
-            <span className="font-display font-bold text-foreground text-lg tracking-tight group-hover:text-primary transition-colors">
-              Utsab Mukharjee
-            </span>
+            <div className="flex flex-col">
+              <span className="font-display font-extrabold text-white text-lg tracking-tight group-hover:text-[#c8ff00] transition-colors">
+                Utsab Mukharjee
+              </span>
+              <span className="font-pixel text-[10px] text-[#9860ff] tracking-wider uppercase">
+                ENGINEER // BUILDER
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2 bg-[#1c0336]/60 px-3 py-1.5 rounded-full border border-[#2a0453]">
             {navLinks.map((item) => {
               const isPageLink = !item.href.startsWith('/#') && item.href !== '/';
               return isPageLink ? (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-200 ${
                     location.pathname === item.href
-                      ? "text-primary bg-primary/10 font-semibold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                      ? "text-[#140128] bg-[#c8ff00] font-black shadow-[0_0_15px_rgba(200,255,0,0.3)]"
+                      : "text-white/70 hover:text-white hover:bg-[#26024a]/80"
                   }`}
                 >
                   {item.name}
@@ -76,7 +80,7 @@ export const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   onClick={() => handleScrollClick(item.href)}
-                  className="px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
+                  className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full text-white/70 hover:text-[#c8ff00] hover:bg-[#26024a]/80 transition-all duration-200"
                 >
                   {item.name}
                 </a>
@@ -84,38 +88,34 @@ export const Navbar = () => {
             })}
           </div>
 
-          {/* Right controls: Theme toggle & Mobile menu button */}
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="text-foreground hover:bg-accent rounded-full transition-transform duration-200 hover:rotate-12"
-              aria-label="Toggle theme"
+          {/* Right Magnetic CTA */}
+          <div className="hidden sm:flex items-center space-x-3">
+            <MagneticButton
+              href="/#contact"
+              onClick={() => handleScrollClick('/#contact')}
+              className="btn-1minus1 text-xs py-2.5 px-5"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-5 h-5 text-yellow-400" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-700" />
-              )}
-            </Button>
+              <span>Get in Touch</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </MagneticButton>
+          </div>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden text-foreground"
+          {/* Mobile menu toggle button */}
+          <div className="flex sm:hidden items-center space-x-2">
+            <button
               onClick={() => setIsOpen(!isOpen)}
+              className="p-2.5 rounded-xl bg-[#26024a] text-white border border-[#9860ff]/30 hover:border-[#c8ff00] transition-colors"
               aria-label="Toggle navigation menu"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
+              {isOpen ? <X className="w-5 h-5 text-[#c8ff00]" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="lg:hidden py-4 border-t border-border/60 animate-fade-in bg-background/95 backdrop-blur-xl">
-            <div className="flex flex-col space-y-1">
+          <div className="lg:hidden py-5 border-t border-[#2a0453] bg-[#140128]/95 backdrop-blur-2xl rounded-b-2xl animate-fade-in">
+            <div className="flex flex-col space-y-1.5 px-2">
               {navLinks.map((item) => {
                 const isPageLink = !item.href.startsWith('/#') && item.href !== '/';
                 return isPageLink ? (
@@ -123,7 +123,7 @@ export const Navbar = () => {
                     key={item.name}
                     to={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
+                    className="px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-white/80 hover:text-[#c8ff00] hover:bg-[#26024a] rounded-xl transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -132,12 +132,21 @@ export const Navbar = () => {
                     key={item.name}
                     href={item.href}
                     onClick={() => handleScrollClick(item.href)}
-                    className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
+                    className="px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-white/80 hover:text-[#c8ff00] hover:bg-[#26024a] rounded-xl transition-colors"
                   >
                     {item.name}
                   </a>
                 );
               })}
+              <div className="pt-3">
+                <a
+                  href="/#contact"
+                  onClick={() => handleScrollClick('/#contact')}
+                  className="btn-1minus1 w-full justify-center text-xs py-3"
+                >
+                  Get in Touch
+                </a>
+              </div>
             </div>
           </div>
         )}

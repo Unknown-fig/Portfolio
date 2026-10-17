@@ -14,8 +14,6 @@ import {
   Globe, 
   ArrowUpRight 
 } from 'lucide-react';
-import { Card, CardContent } from './ui/Card';
-import { Button } from './ui/Button';
 import { projectsData, projectCategories } from '../data/projectsData';
 
 export const Projects = () => {
@@ -58,37 +56,37 @@ export const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-16 sm:py-24 relative">
+    <section id="projects" className="py-20 sm:py-28 relative">
       <div className="section-container">
         
         {/* Section Title & Header */}
-        <div className="flex flex-col items-start mb-10 sm:mb-14 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-specular border border-border/70 text-xs font-semibold text-primary mb-4 shadow-sm">
+        <div className="flex flex-col items-start mb-12 sm:mb-16 text-left">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1c0336] border border-[#c8ff00]/40 text-[#c8ff00] text-xs font-pixel mb-5 uppercase tracking-wider shadow-[0_0_15px_rgba(200,255,0,0.15)]">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Handcrafted Projects & Software</span>
+            <span>DEPLOYED ARTIFACTS // HANDCRAFTED SOFTWARE</span>
           </div>
           
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-4">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-6">
             <div>
-              <h2 className="section-title text-foreground mb-3">
-                Projects & Open-Source Showcase
+              <h2 className="section-title text-white mb-4 uppercase">
+                FEATURED <span className="text-[#c8ff00]">BUILDS</span>
               </h2>
-              <p className="text-muted-foreground text-base sm:text-lg max-w-2xl text-left">
+              <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
                 Directly explore full-stack applications, 3D computer vision experiments, IoT hardware bridges, streaming media servers, and algorithmic CLI tools.
               </p>
             </div>
 
             {/* Quick Stats Pill */}
-            <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-border/80 px-4 py-2.5 rounded-2xl shadow-sm">
-              <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                <Code2 className="w-4 h-4" />
+            <div className="flex items-center gap-3 bg-[#1c0336] border border-[#360866] px-5 py-3 rounded-2xl shadow-md">
+              <div className="w-10 h-10 rounded-xl bg-[#c8ff00]/10 flex items-center justify-center text-[#c8ff00] border border-[#c8ff00]/20">
+                <Code2 className="w-5 h-5" />
               </div>
               <div className="text-left">
-                <div className="text-xs font-semibold text-foreground uppercase tracking-wider">
-                  Verified Repositories
+                <div className="text-[10px] font-pixel text-[#9860ff] uppercase tracking-wider">
+                  VERIFIED BUILDS
                 </div>
-                <div className="text-sm text-primary font-mono font-bold">
-                  {projectsData.length} Projects Live on GitHub
+                <div className="text-sm text-[#c8ff00] font-mono font-bold">
+                  {projectsData.length} Live Repositories
                 </div>
               </div>
             </div>
@@ -96,10 +94,10 @@ export const Projects = () => {
         </div>
 
         {/* Filter Bar & Search Input */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-12">
           
           {/* Categories Horizontal Scroll */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none no-scrollbar">
+          <div className="flex items-center gap-2.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none no-scrollbar">
             {projectCategories.map((category) => {
               const count = categoryCounts[category] || 0;
               const isSelected = selectedCategory === category;
@@ -107,18 +105,18 @@ export const Projects = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-150 spring-press select-none flex items-center gap-2 border ${
+                  className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 select-none flex items-center gap-2 border ${
                     isSelected
-                      ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/20 scale-[1.02]"
-                      : "bg-card/70 text-muted-foreground border-border/80 hover:text-foreground hover:bg-card hover:border-primary/40"
+                      ? "bg-[#c8ff00] text-[#140128] border-[#c8ff00] shadow-[0_0_20px_rgba(200,255,0,0.3)] scale-[1.02]"
+                      : "bg-[#1c0336]/80 text-[#b8a9cf] border-[#360866] hover:text-white hover:border-[#9860ff]/60"
                   }`}
                 >
                   <span>{category}</span>
                   <span
-                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full ${
+                    className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-full ${
                       isSelected
-                        ? "bg-primary-foreground/20 text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
+                        ? "bg-[#140128]/20 text-[#140128]"
+                        : "bg-[#26024a] text-[#c8ff00]"
                     }`}
                   >
                     {count}
@@ -130,20 +128,20 @@ export const Projects = () => {
 
           {/* Search Box */}
           <div className="relative min-w-[240px] sm:min-w-[280px]">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#9860ff]" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tech, keyword, or title..."
-              className="w-full bg-card/80 border border-border/80 rounded-xl pl-9 pr-4 py-2 text-xs sm:text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+              placeholder="Search tech, title, or tags..."
+              className="w-full bg-[#1c0336] border border-[#360866] rounded-full pl-10 pr-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-[#b8a9cf]/50 focus:outline-none focus:border-[#c8ff00] focus:ring-1 focus:ring-[#c8ff00] transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground text-xs"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#b8a9cf] hover:text-white text-xs font-bold"
               >
-                Clear
+                ✕
               </button>
             )}
           </div>
@@ -151,37 +149,36 @@ export const Projects = () => {
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-16 bg-card/40 rounded-2xl border border-dashed border-border/80">
-            <Terminal className="w-10 h-10 text-muted-foreground mx-auto mb-3 opacity-60" />
-            <h3 className="text-base font-semibold text-foreground mb-1">
-              No matching projects found
+          <div className="text-center py-20 bg-[#1c0336]/50 rounded-3xl border border-dashed border-[#360866]">
+            <Terminal className="w-12 h-12 text-[#9860ff] mx-auto mb-3 opacity-60" />
+            <h3 className="text-lg font-bold text-white mb-1 font-display uppercase">
+              No Matching Projects Found
             </h3>
-            <p className="text-xs sm:text-sm text-muted-foreground mb-4">
-              Try adjusting your search query or switching category filters.
+            <p className="text-xs sm:text-sm text-[#b8a9cf] mb-5">
+              Try adjusting your query or resetting category filters.
             </p>
-            <Button
-              variant="outline"
-              size="sm"
+            <button
               onClick={() => {
                 setSelectedCategory("All");
                 setSearchQuery("");
               }}
+              className="btn-1minus1 text-xs py-2.5 px-6"
             >
               Reset Filters
-            </Button>
+            </button>
           </div>
         )}
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <Card
+            <div
               key={project.id}
-              className="group flex flex-col overflow-hidden glass-specular border-border/60 hover:border-primary/50 hover:shadow-2xl hover:-translate-y-1.5 rounded-2xl transition-all duration-300"
+              className="group flex flex-col overflow-hidden bg-[#1c0336]/80 border border-[#360866] hover:border-[#c8ff00]/60 hover:shadow-[0_0_40px_rgba(200,255,0,0.15)] hover:-translate-y-2 rounded-3xl transition-all duration-300"
             >
               {/* Card Image Banner */}
               <div 
-                className="relative h-48 w-full overflow-hidden bg-muted cursor-pointer"
+                className="relative h-52 w-full overflow-hidden bg-[#140128] cursor-pointer"
                 onClick={() => setActiveModalProject(project)}
               >
                 <img
@@ -192,49 +189,48 @@ export const Projects = () => {
                 />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1c0336] via-[#1c0336]/30 to-transparent" />
                 
                 {/* Badges on Top */}
-                <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
-                  <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-md border border-border/70 text-foreground shadow-sm">
+                <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10">
+                  <span className="text-[10px] font-pixel px-3 py-1 rounded-full bg-[#140128]/90 border border-[#360866] text-[#c8ff00] shadow-sm uppercase">
                     {project.category}
                   </span>
                   {project.badge && (
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-primary text-primary-foreground shadow-sm flex items-center gap-1">
-                      <Sparkles className="w-3 h-3" />
+                    <span className="text-[10px] font-pixel px-3 py-1 rounded-full bg-[#c8ff00] text-[#140128] font-bold shadow-sm uppercase">
                       {project.badge}
                     </span>
                   )}
                 </div>
 
                 {/* Inspect Button Pill */}
-                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-                  <span className="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-background/90 backdrop-blur-md text-foreground border border-border shadow-sm flex items-center gap-1">
-                    Quick Inspect
-                    <ArrowUpRight className="w-3 h-3 text-primary" />
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                  <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-[#140128]/90 text-[#c8ff00] border border-[#c8ff00]/40 shadow-sm flex items-center gap-1 uppercase tracking-wider">
+                    Inspect
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#c8ff00]" />
                   </span>
                 </div>
               </div>
 
               {/* Card Body */}
-              <CardContent className="p-5 flex-1 flex flex-col justify-between">
+              <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   {/* Title */}
                   <h3 
                     onClick={() => setActiveModalProject(project)}
-                    className="text-lg font-bold text-foreground group-hover:text-primary transition-colors cursor-pointer mb-2 leading-snug line-clamp-1"
+                    className="text-xl font-display font-black text-white group-hover:text-[#c8ff00] transition-colors cursor-pointer mb-2.5 leading-snug line-clamp-1 uppercase tracking-tight"
                   >
                     {project.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#b8a9cf] mb-4 line-clamp-3 leading-relaxed font-normal">
                     {project.description}
                   </p>
 
                   {/* Human Story Note */}
                   {project.story && (
-                    <div className="p-2.5 rounded-xl bg-primary/5 border border-primary/15 text-[11px] text-foreground/90 italic mb-4 line-clamp-2 text-left">
+                    <div className="p-3 rounded-2xl bg-[#26024a]/60 border border-[#9860ff]/30 text-xs text-[#d1b8ff] italic mb-4 line-clamp-2 text-left">
                       💡 "{project.story}"
                     </div>
                   )}
@@ -242,8 +238,8 @@ export const Projects = () => {
                   {/* Highlights Bullet List */}
                   <div className="space-y-1.5 mb-5 text-left">
                     {project.highlights.slice(0, 2).map((highlight, idx) => (
-                      <div key={idx} className="flex items-start text-xs text-muted-foreground/90 leading-tight gap-2">
-                        <Check className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      <div key={idx} className="flex items-start text-xs text-[#b8a9cf] leading-tight gap-2">
+                        <Check className="w-3.5 h-3.5 text-[#c8ff00] flex-shrink-0 mt-0.5" />
                         <span className="line-clamp-1">{highlight}</span>
                       </div>
                     ))}
@@ -254,13 +250,13 @@ export const Projects = () => {
                     {project.tags.slice(0, 4).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-secondary/80 text-secondary-foreground border border-border/50"
+                        className="text-[11px] font-mono px-2.5 py-0.5 rounded-md bg-[#26024a] text-[#c8ff00] border border-[#9860ff]/30"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="text-[11px] font-mono px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground">
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#190230] text-[#9860ff]">
                         +{project.tags.length - 4}
                       </span>
                     )}
@@ -268,44 +264,41 @@ export const Projects = () => {
                 </div>
 
                 {/* Card Action Buttons */}
-                <div className="pt-4 border-t border-border/70 flex items-center gap-2">
+                <div className="pt-4 border-t border-[#2a0453] flex items-center gap-2.5">
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-foreground text-background hover:bg-primary hover:text-primary-foreground text-xs font-semibold shadow-sm transition-all duration-200"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[#c8ff00] text-[#140128] hover:bg-white text-xs font-black uppercase tracking-wider shadow-sm transition-all duration-200"
                   >
                     <Github className="w-3.5 h-3.5" />
-                    <span>View Repository</span>
+                    <span>Repository</span>
                   </a>
 
                   <button
                     onClick={() => setActiveModalProject(project)}
-                    className="px-3 py-2 rounded-xl border border-border bg-card hover:bg-accent text-foreground text-xs font-medium transition-colors"
-                    title="Inspect Architecture & Details"
+                    className="px-4 py-2.5 rounded-full border border-[#9860ff]/40 bg-[#26024a]/80 hover:border-[#c8ff00] hover:text-[#c8ff00] text-white text-xs font-bold uppercase tracking-wider transition-colors"
                   >
-                    Details
+                    Specs
                   </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 
         {/* Global GitHub Showcase Callout Banner */}
-        <div className="mt-14 sm:mt-18 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-card via-card/90 to-primary/10 border border-border/80 shadow-lg relative overflow-hidden">
-          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-primary/10 to-transparent pointer-events-none" />
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="flex items-center gap-4 text-left">
-              <div className="w-14 h-14 rounded-2xl bg-foreground text-background flex items-center justify-center flex-shrink-0 shadow-md">
-                <Github className="w-7 h-7" />
+        <div className="mt-16 sm:mt-20 p-8 sm:p-10 rounded-3xl bg-[#190230]/90 border border-[#360866] shadow-[0_0_50px_rgba(0,0,0,0.6)] relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+            <div className="flex items-center gap-5 text-left">
+              <div className="w-16 h-16 rounded-2xl bg-[#c8ff00] text-[#140128] flex items-center justify-center flex-shrink-0 shadow-[0_0_25px_rgba(200,255,0,0.4)]">
+                <Github className="w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-lg sm:text-xl font-bold text-foreground">
-                  Explore More on GitHub: @Unknown-fig
+                <h4 className="text-xl sm:text-2xl font-black font-display text-white uppercase tracking-tight">
+                  EXPLORE THE VAULT ON GITHUB: @Unknown-fig
                 </h4>
-                <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-xl">
+                <p className="text-xs sm:text-sm text-[#b8a9cf] mt-1 max-w-xl font-normal">
                   Inspect commit logs, architecture benchmarks, branch workflows, and active contributions across all desktop and cloud repositories.
                 </p>
               </div>
@@ -316,7 +309,7 @@ export const Projects = () => {
                 href="https://github.com/Unknown-fig"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-primary text-primary-foreground font-semibold text-sm shadow-md hover:bg-primary/90 transition-all hover:scale-[1.02]"
+                className="w-full md:w-auto btn-1minus1 text-xs py-3.5 px-8"
               >
                 <span>Visit GitHub Profile</span>
                 <ExternalLink className="w-4 h-4" />
@@ -327,64 +320,65 @@ export const Projects = () => {
 
       </div>
 
-      {/* Project Detail & Quick Inspect Modal / Apple Sheet */}
+      {/* Project Detail & Quick Inspect Modal */}
       {activeModalProject && (
         <div 
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-6 bg-black/85 backdrop-blur-xl animate-fade-in"
           onClick={() => setActiveModalProject(null)}
         >
           <div 
-            className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] bg-background border border-border/80 rounded-t-[32px] sm:rounded-3xl shadow-2xl overflow-y-auto flex flex-col"
+            className="relative w-full max-w-3xl max-h-[92vh] sm:max-h-[90vh] bg-[#140128] border border-[#360866] rounded-t-[32px] sm:rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.8)] overflow-y-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Apple HIG Sheet Grabber Indicator */}
-            <div className="w-12 h-1.5 bg-muted-foreground/35 hover:bg-muted-foreground/60 rounded-full mx-auto my-2.5 transition-colors cursor-grab sm:hidden flex-shrink-0" />
+            {/* Grabber Indicator */}
+            <div className="w-12 h-1.5 bg-[#9860ff]/40 rounded-full mx-auto my-3 sm:hidden flex-shrink-0" />
+            
             {/* Modal Image Header */}
-            <div className="relative h-60 sm:h-72 w-full bg-muted flex-shrink-0 overflow-hidden">
+            <div className="relative h-64 sm:h-80 w-full bg-[#1c0336] flex-shrink-0 overflow-hidden">
               <img
                 src={activeModalProject.image}
                 alt={activeModalProject.title}
                 className="w-full h-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#140128] via-[#140128]/40 to-transparent" />
               
               {/* Close Button */}
               <button
                 onClick={() => setActiveModalProject(null)}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-background/80 backdrop-blur-md border border-border flex items-center justify-center text-foreground hover:bg-accent transition-colors z-20"
+                className="absolute top-5 right-5 w-10 h-10 rounded-full bg-[#140128]/80 backdrop-blur-md border border-[#9860ff]/40 flex items-center justify-center text-white hover:text-[#c8ff00] hover:border-[#c8ff00] transition-colors z-20"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>
 
               {/* Title & Badges in Header */}
-              <div className="absolute bottom-4 left-6 right-6">
+              <div className="absolute bottom-5 left-6 right-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-background/90 text-foreground border border-border">
+                  <span className="text-[10px] font-pixel px-3 py-1 rounded-full bg-[#140128]/90 text-[#c8ff00] border border-[#360866] uppercase">
                     {activeModalProject.category}
                   </span>
                   {activeModalProject.badge && (
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary text-primary-foreground">
+                    <span className="text-[10px] font-pixel px-3 py-1 rounded-full bg-[#c8ff00] text-[#140128] font-bold uppercase">
                       {activeModalProject.badge}
                     </span>
                   )}
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight drop-shadow-sm">
+                <h3 className="text-2xl sm:text-4xl font-black font-display text-white tracking-tight uppercase">
                   {activeModalProject.title}
                 </h3>
               </div>
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 sm:p-8 space-y-6 flex-1 pb-[max(1.75rem,env(safe-area-inset-bottom))]">
+            <div className="p-6 sm:p-8 space-y-6 flex-1 pb-[max(2rem,env(safe-area-inset-bottom))]">
               {/* Human Story Callout */}
               {activeModalProject.story && (
-                <div className="p-4 sm:p-5 rounded-2xl bg-primary/5 border border-primary/20 text-left">
-                  <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
+                <div className="p-5 rounded-2xl bg-[#1c0336] border border-[#c8ff00]/40 text-left">
+                  <div className="flex items-center gap-2 text-xs font-pixel font-bold text-[#c8ff00] uppercase tracking-wider mb-2">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Why I Built This</span>
+                    <span>WHY I BUILT THIS // MOTIVATION</span>
                   </div>
-                  <p className="text-sm sm:text-base text-foreground/90 italic leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#d1b8ff] italic leading-relaxed">
                     "{activeModalProject.story}"
                   </p>
                 </div>
@@ -392,26 +386,26 @@ export const Projects = () => {
 
               {/* Description */}
               <div className="text-left">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
-                  Technical Architecture
+                <h4 className="text-[11px] font-pixel uppercase tracking-wider text-[#9860ff] mb-2">
+                  TECHNICAL ARCHITECTURE
                 </h4>
-                <p className="text-sm sm:text-base text-foreground/90 leading-relaxed">
+                <p className="text-sm sm:text-base text-white/90 leading-relaxed font-normal">
                   {activeModalProject.description}
                 </p>
               </div>
 
               {/* Key Architectural Highlights */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">
-                  Key Capabilities & Architecture
+                <h4 className="text-[11px] font-pixel uppercase tracking-wider text-[#9860ff] mb-3">
+                  SYSTEM CAPABILITIES
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {activeModalProject.highlights.map((highlight, idx) => (
                     <div 
                       key={idx}
-                      className="p-3 rounded-xl bg-card border border-border/80 flex items-start gap-2.5 text-xs text-foreground/90"
+                      className="p-3.5 rounded-2xl bg-[#1c0336] border border-[#360866] flex items-start gap-2.5 text-xs text-white/90"
                     >
-                      <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <Check className="w-4 h-4 text-[#c8ff00] flex-shrink-0 mt-0.5" />
                       <span>{highlight}</span>
                     </div>
                   ))}
@@ -420,14 +414,14 @@ export const Projects = () => {
 
               {/* Tech Stack */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2.5">
-                  Technologies & Frameworks
+                <h4 className="text-[11px] font-pixel uppercase tracking-wider text-[#9860ff] mb-2.5">
+                  TECHNOLOGIES & PROTOCOLS
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {activeModalProject.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs font-mono px-3 py-1 rounded-lg bg-secondary text-secondary-foreground border border-border"
+                      className="text-xs font-mono px-3 py-1 rounded-lg bg-[#26024a] text-[#c8ff00] border border-[#9860ff]/30 font-medium"
                     >
                       {tag}
                     </span>
@@ -436,40 +430,38 @@ export const Projects = () => {
               </div>
 
               {/* Terminal Clone Command Bar */}
-              <div className="p-4 rounded-2xl bg-card border border-border/80 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-2 overflow-x-auto text-xs font-mono text-muted-foreground">
-                  <Terminal className="w-4 h-4 text-primary flex-shrink-0" />
-                  <span className="text-foreground font-semibold">git clone</span>
-                  <span className="text-primary truncate">{activeModalProject.githubUrl}.git</span>
+              <div className="p-4 rounded-2xl bg-[#1c0336] border border-[#360866] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2 overflow-x-auto text-xs font-mono text-[#b8a9cf]">
+                  <Terminal className="w-4 h-4 text-[#c8ff00] flex-shrink-0" />
+                  <span className="text-white font-bold">git clone</span>
+                  <span className="text-[#c8ff00] truncate">{activeModalProject.githubUrl}.git</span>
                 </div>
 
-                <Button
-                  variant="outline"
-                  size="sm"
+                <button
                   onClick={() => handleCopyClone(activeModalProject.githubUrl)}
-                  className="gap-1.5 flex-shrink-0 text-xs"
+                  className="px-4 py-2 rounded-xl border border-[#9860ff]/40 bg-[#26024a] hover:border-[#c8ff00] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
                 >
                   {copiedClone ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-500" />
-                      <span>Copied!</span>
+                      <Check className="w-3.5 h-3.5 text-[#c8ff00]" />
+                      <span className="text-[#c8ff00]">Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-3.5 h-3.5 text-[#b8a9cf]" />
                       <span>Copy Clone Cmd</span>
                     </>
                   )}
-                </Button>
+                </button>
               </div>
 
               {/* Modal Action CTA */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-3">
                 <a
                   href={activeModalProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all shadow-md"
+                  className="w-full sm:flex-1 btn-1minus1 text-xs py-3.5 justify-center"
                 >
                   <Github className="w-4 h-4" />
                   <span>Open GitHub Repository</span>
@@ -481,9 +473,9 @@ export const Projects = () => {
                     href={activeModalProject.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-border bg-card hover:bg-accent text-foreground font-medium text-sm transition-colors"
+                    className="w-full sm:w-auto btn-1minus1-outline text-xs py-3.5 px-6"
                   >
-                    <span>Documentation & Demo</span>
+                    <span>Live Showcase</span>
                   </a>
                 )}
               </div>
