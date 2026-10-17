@@ -105,11 +105,12 @@ export const Contact = () => {
                   <Linkedin className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Unknown-fig"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-xl border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-colors shadow-sm"
                   aria-label="GitHub Profile"
+                  title="Visit Utsab Mukharjee on GitHub"
                 >
                   <Github className="w-5 h-5" />
                 </a>
