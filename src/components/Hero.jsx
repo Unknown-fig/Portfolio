@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { MagneticButton } from './ui/MagneticButton';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 export const Hero = () => {
@@ -52,14 +53,14 @@ export const Hero = () => {
               </span>
             </div>
 
-            {/* Main Name & 1minus1 Display Headline */}
+            {/* Main Name & 1minus1 Display Headline with SplitText Polygon Reveal */}
             <div className="space-y-4">
               <h1 className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white tracking-tight leading-[0.95] uppercase">
-                ENGINEERING <br />
+                <SplitTextReveal mode="words" delay={0.05}>ENGINEERING</SplitTextReveal> <br />
                 <span className="text-[#c8ff00] drop-shadow-[0_0_35px_rgba(200,255,0,0.4)]">
-                  THE REALM
+                  <SplitTextReveal mode="words" delay={0.15}>THE REALM</SplitTextReveal>
                 </span> <br />
-                OF AI & SYSTEMS.
+                <SplitTextReveal mode="words" delay={0.25}>OF AI & SYSTEMS.</SplitTextReveal>
               </h1>
               <p className="text-xl sm:text-2xl font-bold text-[#d1b8ff] font-sans leading-snug">
                 Hey, I'm <span className="text-white underline decoration-[#c8ff00] decoration-4 underline-offset-4">Utsab Mukharjee</span> — First-year AI researcher, low-level C explorer, and builder.

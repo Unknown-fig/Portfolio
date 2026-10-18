@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { Button } from './ui/Button';
 import { Gamepad2, Dice1, Dice2, Dice3, Dice4, Dice5, Dice6, RotateCcw } from 'lucide-react';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 const diceIcons = [Dice1, Dice2, Dice3, Dice4, Dice5, Dice6];
@@ -260,7 +261,10 @@ export const Games = () => {
             <span>ARCADE VAULT // PLAYABLE BUILDS</span>
           </div>
           <h2 className="section-title text-white mb-4 uppercase">
-            PLAYABLE <span className="text-[#c8ff00]">ARCADE</span>
+            <SplitTextReveal mode="words">PLAYABLE</SplitTextReveal>{' '}
+            <span className="text-[#c8ff00]">
+              <SplitTextReveal mode="words" delay={0.12}>ARCADE</SplitTextReveal>
+            </span>
           </h2>
           <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
             Built from scratch to demonstrate React state synchronization, algorithmic movement, and responsive UI components.

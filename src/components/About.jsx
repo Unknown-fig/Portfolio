@@ -13,6 +13,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 export const About = () => {
@@ -67,7 +68,10 @@ export const About = () => {
             <span>ORIGINS & THE STORY // ARCHIVES</span>
           </div>
           <h2 className="section-title text-white mb-4 uppercase">
-            BEHIND THE <span className="text-[#c8ff00]">SCREEN</span>
+            <SplitTextReveal mode="words">BEHIND THE</SplitTextReveal>{' '}
+            <span className="text-[#c8ff00]">
+              <SplitTextReveal mode="words" delay={0.12}>SCREEN</SplitTextReveal>
+            </span>
           </h2>
           <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl font-normal">
             Beyond the resume bullet points: how I got into software, why I care about low-level systems, and what keeps me building late at night.

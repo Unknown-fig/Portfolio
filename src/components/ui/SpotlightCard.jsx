@@ -1,16 +1,23 @@
 import React, { useRef, useState } from 'react';
 
+/**
+ * SpotlightCard - 1minus1 Specular Glare + 3D Spring Tilt Physics
+ * Projects mouse-tracking specular highlights, border illumination, and 3D perspective tilt.
+ */
 export const SpotlightCard = ({
   children,
   className = "",
   spotlightColor = "rgba(200, 255, 0, 0.12)",
   borderColor = "rgba(200, 255, 0, 0.4)",
+  tilt = true,
+  maxTilt = 4, // Max tilt degrees
   onClick,
   ...props
 }) => {
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [tiltRotation, setTiltRotation] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
   const handleMouseMove = (e) => {
@@ -18,7 +25,17 @@ export const SpotlightCard = ({
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
 
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    const posX = e.clientX - rect.left;
+    const posY = e.clientY - rect.top;
+    setPosition({ x: posX, y: posY });
+
+    if (tilt) {
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((posY - centerY) / centerY) * -maxTilt;
+      const rotateY = ((posX - centerX) / centerX) * maxTilt;
+      setTiltRotation({ x: rotateX, y: rotateY });
+    }
   };
 
   const handleFocus = () => {
@@ -37,6 +54,7 @@ export const SpotlightCard = ({
 
   const handleMouseLeave = () => {
     setOpacity(0);
+    setTiltRotation({ x: 0, y: 0 });
   };
 
   return (
@@ -48,7 +66,13 @@ export const SpotlightCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      className={`relative rounded-3xl border border-[#360866] bg-[#190230]/85 overflow-hidden transition-all duration-300 ${className}`}
+      style={{
+        transform: tilt
+          ? `perspective(1000px) rotateX(${tiltRotation.x}deg) rotateY(${tiltRotation.y}deg)`
+          : undefined,
+        transformStyle: 'preserve-3d',
+      }}
+      className={`relative rounded-3xl border border-[#360866] bg-[#190230]/85 overflow-hidden transition-all duration-300 will-change-transform ${className}`}
       {...props}
     >
       {/* Dynamic Specular Spotlight Sheen */}

@@ -11,6 +11,7 @@ import {
   ShieldCheck 
 } from 'lucide-react';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 export const Skills = () => {
@@ -135,7 +136,10 @@ export const Skills = () => {
             <span>DEVELOPER TOOLBOX // WEAPONS OF CHOICE</span>
           </div>
           <h2 className="section-title text-white mb-4 uppercase">
-            TECHNOLOGIES I <span className="text-[#c8ff00]">COMMAND</span>
+            <SplitTextReveal mode="words">TECHNOLOGIES I</SplitTextReveal>{' '}
+            <span className="text-[#c8ff00]">
+              <SplitTextReveal mode="words" delay={0.12}>COMMAND</SplitTextReveal>
+            </span>
           </h2>
           <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl font-normal">
             No arbitrary percentage bars. Here is the actual toolkit I use to write low-level systems, build full-stack web applications, wire up IoT microcontrollers, and experiment with computer vision.

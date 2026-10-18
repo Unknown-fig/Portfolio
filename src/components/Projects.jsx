@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { projectsData, projectCategories } from '../data/projectsData';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { ChromaticImage } from './ui/ChromaticImage';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 export const Projects = () => {
@@ -75,7 +77,10 @@ export const Projects = () => {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between w-full gap-6">
             <div>
               <h2 className="section-title text-white mb-4 uppercase">
-                FEATURED <span className="text-[#c8ff00]">BUILDS</span>
+                <SplitTextReveal mode="words">FEATURED</SplitTextReveal>{' '}
+                <span className="text-[#c8ff00]">
+                  <SplitTextReveal mode="words" delay={0.12}>BUILDS</SplitTextReveal>
+                </span>
               </h2>
               <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
                 Directly explore full-stack applications, 3D computer vision experiments, IoT hardware bridges, streaming media servers, and algorithmic CLI tools.
@@ -187,7 +192,7 @@ export const Projects = () => {
               onMouseEnter={() => soundEngine.playHover()}
               className="group flex flex-col overflow-hidden hover:-translate-y-2 transition-all duration-300"
             >
-              {/* Card Image Banner */}
+              {/* Card Image Banner with Chromatic Aberration & Scanlines */}
               <div 
                 className="relative h-52 w-full overflow-hidden bg-[#140128] cursor-pointer"
                 onClick={() => {
@@ -195,15 +200,16 @@ export const Projects = () => {
                   setActiveModalProject(project);
                 }}
               >
-                <img
+                <ChromaticImage
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
+                  className="object-top"
+                  containerClassName="w-full h-full"
+                  intensity={6}
                 />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1c0336] via-[#1c0336]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1c0336] via-[#1c0336]/30 to-transparent pointer-events-none" />
                 
                 {/* Badges on Top */}
                 <div className="absolute top-4 left-4 flex flex-wrap gap-2 z-10">

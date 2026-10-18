@@ -3,6 +3,7 @@ import { Mail, MapPin, Send, Github, Linkedin, Instagram, Languages } from 'luci
 import { toast } from 'sonner';
 import { MagneticButton } from './ui/MagneticButton';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 export const Contact = () => {
@@ -42,7 +43,10 @@ export const Contact = () => {
             <span>TRANSMISSION CHANNELS // OPEN FREQUENCY</span>
           </div>
           <h2 className="section-title text-white mb-4 uppercase">
-            LET'S BUILD <span className="text-[#c8ff00]">SOMETHING</span>
+            <SplitTextReveal mode="words">LET'S BUILD</SplitTextReveal>{' '}
+            <span className="text-[#c8ff00]">
+              <SplitTextReveal mode="words" delay={0.12}>SOMETHING</SplitTextReveal>
+            </span>
           </h2>
           <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
             Interested in collaborating on AI/ML models, low-level systems in C, creative WebGL graphics, or have an open role? Transmit a message below.

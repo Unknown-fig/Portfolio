@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { timelineData } from '../data/timelineData';
 import { Baby, Code, BookOpen, Building, Award, GraduationCap, Briefcase, MapPin, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SpotlightCard } from './ui/SpotlightCard';
+import { SplitTextReveal } from './ui/SplitTextReveal';
 import { soundEngine } from '../utils/soundEngine';
 
 const iconMap = {
@@ -45,7 +46,10 @@ export const Timeline = () => {
             <span>CHRONOLOGY // TURNING POINTS</span>
           </div>
           <h2 className="section-title text-white mb-4 uppercase">
-            DEVELOPER <span className="text-[#c8ff00]">TRAJECTORY</span>
+            <SplitTextReveal mode="words">DEVELOPER</SplitTextReveal>{' '}
+            <span className="text-[#c8ff00]">
+              <SplitTextReveal mode="words" delay={0.12}>TRAJECTORY</SplitTextReveal>
+            </span>
           </h2>
           <p className="text-[#b8a9cf] text-base sm:text-lg max-w-2xl text-left font-normal">
             From discovering HTML tags at age 9 to building systems in C, Python, and modern web frameworks.
